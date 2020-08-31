@@ -1,16 +1,22 @@
 <template>
 	<div>
-		创建票单
+		<Top></Top>
+		<b>创建票单</b>
+		
 	</div>
 </template>
 <script>
 	import { Button } from 'vant';
+	import Top from '../assets/top'
 	export default {
 		name: 'createTicket',
 		data() {
 			return {
 				msg: 'createTicket'
 			}
+		},
+		components:{
+			Top
 		}
 	}
 </script>

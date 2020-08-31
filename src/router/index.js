@@ -16,7 +16,7 @@ export default new Router({
 			component: index
 		},
 		{
-			path: '/created',
+			path: '/createTicket',
 			name: 'createTicket',
 			component: createTicket
 		},
