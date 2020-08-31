@@ -1,5 +1,5 @@
 <template>
-	<div class="serviceIndex">
+	<div>
 		<van-button type="primary">账号</van-button>
 		<van-button type="primary">充值</van-button>
 		<van-button type="primary">网络</van-button>
@@ -11,7 +11,7 @@
 <script>
 	import { Button } from 'vant';
 	export default {
-		name: 'serviceIndex',
+		name: 'index',
 		data() {
 			return {
 				msg: '问题反馈类型'

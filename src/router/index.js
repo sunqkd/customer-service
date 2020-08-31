@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
-
+import createTicket from '@/components/createTicket'
+import faq from '@/components/faq'
+import faqdetail from '@/components/faqdetail'
+import ticketList from '@/components/ticketList'
+import ticketDetail from '@/components/ticketDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -10,6 +14,31 @@ export default new Router({
 			path: '/',
 			name: 'index',
 			component: index
+		},
+		{
+			path: '/created',
+			name: 'createTicket',
+			component: createTicket
+		},
+		{
+			path: '/faq',
+			name: 'faq',
+			component: faq
+		},
+		{
+			path: '/faqdetail',
+			name: 'faqdetail',
+			component: faqdetail
+		},
+		{
+			path: '/ticketList',
+			name: 'ticketList',
+			component: ticketList
+		},
+		{
+			path: '/ticketDetail',
+			name: 'ticketDetail',
+			component: ticketDetail
 		},
 		{ 
 			path: '*',
