@@ -10,6 +10,10 @@
 			<li @click="goTicketDetail()">ticket</li>
 			<li @click="goTicketDetail()">ticket</li>
 		</ul>
+		<div>
+			<van-button type="danger">历史反馈</van-button>
+			<van-button type="danger">联系客服</van-button>
+		</div>
 	</div>
 </template>
 <script>
@@ -28,7 +32,8 @@
 			}
 		},
 		components:{
-			Top
+			Top,
+			[Button.name]:Button
 		}
 	}
 </script>
