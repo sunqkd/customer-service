@@ -10,6 +10,7 @@
 </template>
 <script>
 	import { Button } from 'vant';
+	import url from 'url'
 	export default {
 		name: 'index',
 		data() {
@@ -17,11 +18,19 @@
 				msg: '问题反馈类型'
 			}
 		},
+		created(){
+			console.log()
+			var urllist = window.location.href
+			console.log(url.parse(urllist,true))
+		},
 		methods:{
 			goFaq(){ // 去faq界面
 				this.$router.push('/faq')
 			},
 			goTicket(){ // 去票单页面
+				/*
+					处理页面				
+				*/
 				this.$router.push('/createTicket')
 			}
 		},
