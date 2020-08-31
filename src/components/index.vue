@@ -19,9 +19,12 @@
 			}
 		},
 		created(){
-			console.log()
 			var urllist = window.location.href
 			console.log(url.parse(urllist,true))
+			/*
+				如果有参数拼接 则存储为session中
+				如果没有参数拼接 session不做处理
+			*/
 		},
 		methods:{
 			goFaq(){ // 去faq界面
@@ -29,7 +32,10 @@
 			},
 			goTicket(){ // 去票单页面
 				/*
-					处理页面				
+					处理逻辑
+					当玩家存在多条票单，跳转票单列表  /ticketList	
+					当玩家仅有一条票单，票单详情 /ticketDetail
+					当玩家无票单：新建票单  /createTicket
 				*/
 				this.$router.push('/createTicket')
 			}
