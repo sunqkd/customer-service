@@ -15,7 +15,8 @@
 			}
 		},
 		components:{
-			Top
+			Top,
+			[Button.name]:Button
 		}
 	}
 </script>

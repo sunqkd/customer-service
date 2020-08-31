@@ -1,7 +1,15 @@
 <template>
 	<div>
 		<Top></Top>
-		票单列表
+		<b>票单列表</b>
+		<ul>
+			<li @click="goTicketDetail()">ticket</li>
+			<li @click="goTicketDetail()">ticket</li>
+			<li @click="goTicketDetail()">ticket</li>
+			<li @click="goTicketDetail()">ticket</li>
+			<li @click="goTicketDetail()">ticket</li>
+			<li @click="goTicketDetail()">ticket</li>
+		</ul>
 	</div>
 </template>
 <script>
@@ -12,6 +20,11 @@
 		data() {
 			return {
 				msg: 'ticketList'
+			}
+		},
+		methods:{
+			goTicketDetail(){
+				this.$router.push('/ticketDetail')
 			}
 		},
 		components:{
