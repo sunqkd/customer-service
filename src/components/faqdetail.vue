@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Top></Top>
-		faqdetail
+		<div><b>faqdetail</b></div>
 	</div>
 </template>
 <script>
@@ -11,7 +11,7 @@
 		name: 'faqdetail',
 		data() {
 			return {
-				msg: 'faq'
+				msg: 'faqdetail'
 			}
 		},
 		components:{
