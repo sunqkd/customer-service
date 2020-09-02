@@ -4,14 +4,11 @@
 		<b>票单详情</b>
 		<pre>{{form}}</pre>
 		<ul>
-			<li>
-				UTC 2020/08/01 12:34:56<br/>
-				blablablabla
-				<hr/>
-			</li>
-			<li>
-				UTC 2020/08/01 12:34:56<br/>
-				blablablabla
+			<li v-for="(item,index) in recodeList" :key="index">
+				{{item.createAt}}<br/>
+				{{item.content}}
+				<br/>
+				<img  :src="item.image" style="width:50px;height:50px;"/>
 				<hr/>
 			</li>
 		</ul>
@@ -30,13 +27,13 @@
 		</div>
 		<!-- 隐藏发送框 -->
 		<div v-if="!listFlag">
-			<van-button type="danger">问题已解决</van-button>
+			<van-button type="danger" @click="updateResolve()">问题已解决</van-button>
 			<van-button type="danger" @click="reply()">回复信息</van-button>
 		</div>
 	</div>
 </template>
 <script>
-	import { Button,Uploader } from 'vant';
+	import { Button,Uploader,Toast } from 'vant';
 	import url from 'url'
 	import Top from '../assets/top'
 	export default {
@@ -45,12 +42,14 @@
 			return {
 				ticketId:'', // 票单id
 				form:{
-					content:'',
+					content:'', // 回复内容
+					image:'', // 添加的图片
 				},
 				fileList:[
 					{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }
 				],
 				listFlag:false, // 是否显示发送输入框
+				recodeList:[], // 工单记录
 			}
 		},
 		created(){
@@ -65,7 +64,11 @@
 					ticketId:this.ticketId
 				}
 				this.$axios.post('/api/ticket/record/all',data).then((res)=>{
-					console.log(res)
+					if(res.data.code == 0){
+						this.recodeList = res.data.data
+					}else{
+
+					}
 				})
 			},
 			// 上传图片
@@ -82,12 +85,36 @@
 			},
 			// 回复信息发送
 			sendreply(){
-
+				var data = {
+					content:this.form.content,
+					image:'https://img.yzcdn.cn/vant/leaf.jpg',
+					ticketId:this.ticketId,
+					type:1
+				}
+				this.$axios.post('/api/ticket/record/create',data).then((res)=>{
+					console.log(res)
+					Toast.success('success');
+					this.getRecodeList()
+				}).catch((error)=>{
+					
+				})
+			},
+			// 问题已解决
+			updateResolve(){
+				let data = {
+					status:3, // 3 表示已解决
+					ticketId:this.ticketId
+				}
+				this.$axios.post('/api/ticket/update',data).then((res)=>{
+					console.log(res)
+					Toast.success('success');
+				})
 			}
 		},
 		components:{
 			Top,
 			[Button.name]:Button,
+			[Toast.name]:Toast,
 			[Uploader.name]:Uploader
 		}
 	}
