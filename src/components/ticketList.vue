@@ -12,7 +12,6 @@
 		<div>
 			<van-button type="danger" @click="gohistory()">历史反馈</van-button>
 			<van-button type="danger" @click="linkCustomer()">联系客服</van-button>
-			<van-button type="danger" @click="getTicketList()">查询</van-button>
 		</div>
 	</div>
 </template>
