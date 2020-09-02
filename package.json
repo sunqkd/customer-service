@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "babel-plugin-import": "^1.13.0",
+    "lrz": "^4.9.40",
     "vant": "^2.10.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

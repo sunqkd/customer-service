@@ -5,6 +5,7 @@ import createTicket from '@/components/createTicket'
 import faq from '@/components/faq'
 import faqdetail from '@/components/faqdetail'
 import ticketList from '@/components/ticketList'
+import historyticketlist from '@/components/historyticketlist'
 import ticketDetail from '@/components/ticketDetail'
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
 			path: '/ticketList',
 			name: 'ticketList',
 			component: ticketList
+		},
+		{
+			path: '/historyticketlist',
+			name: 'historyticketlist',
+			component: historyticketlist
 		},
 		{
 			path: '/ticketDetail',
