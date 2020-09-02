@@ -15,7 +15,7 @@
 		name: 'index',
 		data() {
 			return {
-				msg: '问题反馈类型'
+				msg: '问题反馈类型',
 			}
 		},
 		created(){
@@ -30,14 +30,8 @@
 			goFaq(){ // 去faq界面
 				this.$router.push('/faq')
 			},
-			goTicket(){ // 去票单页面
-				/*
-					处理逻辑
-					当玩家存在多条票单，跳转票单列表  /ticketList	
-					当玩家仅有一条票单，票单详情 /ticketDetail
-					当玩家无票单：新建票单  /createTicket
-				*/
-				this.$router.push('/createTicket')
+			goTicket(){ // 去票单列表
+				this.$router.push('/ticketList')
 			}
 		},
 		components:{
