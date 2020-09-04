@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" v-cloak>
 		<router-view />
 	</div>
 </template>
@@ -29,4 +29,7 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
+	[v-cloak] {
+        display: none;
+    }
 </style>
