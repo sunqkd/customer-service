@@ -15,19 +15,23 @@
         margin: 0;
         padding: 0
     }
+	@font-face {
+		font-family: PTsans;
+		src: url('/static/font/PTsans.ttf');
+	}
     html, body {
         width: 100%;
         height: 100%;
 		font-size: 26.67vw;
-		font-family: PTSans-Bold;
+		letter-spacing: 0px;
+		font-family: PTsans;
 		background:#d9e7f1;
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: grayscale;
     }
 	#app {
-		font-family: PTSans-Bold;
 		width: 100%;
 		height:100%;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
 	}
 	[v-cloak] {
         display: none;

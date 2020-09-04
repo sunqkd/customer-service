@@ -1,8 +1,15 @@
 <template>
-	<div>
+	<div class="faq">
 		<Top :backflag="true" :homeflag="true"></Top>
-		<b><div>faq</div></b>
-		<input type="text" v-model="searchName" placeholder="请输入您遇到的问题">
+		<div class="faqContain">
+			<div class="inputSearch">
+				<div>
+					<img src="/static/img/bar_icon_search.png" alt="">
+				</div>
+				<input type="text" v-model="searchName" placeholder="请输入您遇到的问题">
+			</div>
+		</div>
+		
 		<ul>
 			<li @click="faqDetail()">faq1x</li>
 			<li @click="faqDetail()">faq2x</li>
@@ -36,6 +43,19 @@
 		}
 	}
 </script>
-<style scoped>
-	
+<style lang="scss" scoped>
+	.faq{
+		width:100%;
+		height:100%;
+		// 竖屏模式
+		@media screen and (orientation:portrait){
+
+		}
+		// 横屏模式
+		@media screen and (orientation:landscape) {
+			.faqContain{
+
+			}
+		}
+	}
 </style>
