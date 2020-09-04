@@ -206,8 +206,8 @@
 						justify-content: space-around;
 					}
 					.questionItem{
-						width:0.725rem;
-						height:0.725rem;
+						width:0.7rem;
+						height:0.7rem;
 						background:#ffffff;
 						border: solid 2px #000000;
 						border-radius: 16px;
