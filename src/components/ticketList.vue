@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Top></Top>
+		<Top :backflag="true" :homeflag="true"></Top>
 		<b>票单列表</b>
 		<ul>
 			<!-- 当前的反馈 -->

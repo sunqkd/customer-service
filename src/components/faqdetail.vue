@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Top></Top>
+		<Top :backflag="true" :homeflag="true"></Top>
 		<div><b>faqdetail</b></div>
 	</div>
 </template>

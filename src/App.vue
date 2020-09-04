@@ -18,9 +18,14 @@
     html, body {
         width: 100%;
         height: 100%;
+		font-size: 26.67vw;
+		font-family: PTSans-Bold;
+		background:#d9e7f1;
     }
 	#app {
-		font-family: 'Avenir', Helvetica, Arial, sans-serif;
+		font-family: PTSans-Bold;
+		width: 100%;
+		height:100%;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}

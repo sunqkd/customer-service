@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Top></Top>
 		<van-button type="primary" @click="goFaq()">账号</van-button>
 		<van-button type="primary" @click="goFaq()">充值</van-button>
 		<van-button type="primary" @click="goFaq()">网络</van-button>
@@ -10,6 +11,7 @@
 </template>
 <script>
 	import { Button } from 'vant';
+	import Top from '../assets/top'
 	import url from 'url'
 	export default {
 		name: 'index',
@@ -35,6 +37,7 @@
 			}
 		},
 		components:{
+			Top,
 			[Button.name]:Button
 		}
 	}

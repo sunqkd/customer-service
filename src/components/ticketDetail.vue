@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Top></Top>
+		<Top :backflag="true" :homeflag="true"></Top>
 		<b>票单详情</b>
 		<pre>{{form}}</pre>
 		<ul>

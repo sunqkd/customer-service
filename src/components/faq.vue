@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Top></Top>
+		<Top :backflag="true" :homeflag="true"></Top>
 		<b><div>faq</div></b>
 		<input type="text" v-model="searchName" placeholder="请输入您遇到的问题">
 		<ul>

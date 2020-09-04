@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Top></Top>
+        <Top :backflag="true" :homeflag="true"></Top>
         <div>历史票单</div>
         <ul>
             <!-- 历史票单 -->

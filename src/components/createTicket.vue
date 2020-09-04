@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Top></Top>
+		<Top :backflag="true" :homeflag="true"></Top>
 		<b>创建票单</b>
 		<!-- 邮箱 -->
 		<pre>
