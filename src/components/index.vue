@@ -39,7 +39,41 @@
 		</section>
 		<!-- 横屏样式布局 -->
 		<section class="landscapeFlag">
-           
+			<!-- 左图片 -->
+			<div class="leftImgContain">
+				<img src="/static/img/support_home_bg.png" alt="">
+			</div>
+			<!-- 右内容区 -->
+			<div class="rightContain">
+				<div class="lineoneP">
+					<div class="questionItem" @click="goFaq()">
+						<img src="/static/img/support_icon_account.png" alt="">
+						<span>Account</span>
+					</div>
+					<div class="questionItem" @click="goFaq()">
+						<img src="/static/img/support_icon_recharge.png" alt="">
+						<span>Recharge</span>
+					</div>
+					<div class="questionItem" @click="goFaq()">
+						<img src="/static/img/support_icon_network.png" alt="">
+						<span>Network</span>
+					</div>
+				</div>
+				<div class="lineTwoP">
+					<div class="questionItem" @click="goFaq()">
+						<img src="/static/img/support_icon_bug.png" alt="">
+						<span>Bug</span>
+					</div>
+					<div class="questionItem" @click="goFaq()">
+						<img src="/static/img/support_icon_others.png" alt="">
+						<span>Others</span>
+					</div>
+					<div class="questionItem" @click="goTicket()">
+						<img src="/static/img/support_icon_ticket.png" alt="">
+						<span>Ticket</span>
+					</div>
+				</div>
+			</div>
 		</section>
 	</div>
 </template>
@@ -76,6 +110,8 @@
 </script>
 <style lang="scss" scoped>
 	.homeIndex{
+		width:100%;
+		height:100%;
 		// 竖屏样式
 		@media screen and (orientation:portrait) {
 			.landscapeFlag{
@@ -137,7 +173,58 @@
 				display: none;
 			}
 			.landscapeFlag{
-				
+				width:100%;
+				height:calc(100% - 0.257rem);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.leftImgContain{
+					height:100%;
+					img{
+						display:block;
+						height:100%;
+						width:auto;
+					}
+				}
+				.rightContain{
+					flex: 1;
+					height:100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: space-around;
+					.lineoneP{
+						width:100%;
+						display: flex;
+						align-items: center;
+						justify-content: space-around;
+					}
+					.lineTwoP{
+						width:100%;
+						display: flex;
+						align-items: center;
+						justify-content: space-around;
+					}
+					.questionItem{
+						width:0.725rem;
+						height:0.725rem;
+						background:#ffffff;
+						border: solid 2px #000000;
+						border-radius: 16px;
+						box-sizing: border-box;
+						display:flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						font-size:0.0914rem;
+						color: #4c4c4c;
+						img{
+							display:block;
+							width:0.3457rem;
+							height:auto;
+						}
+					}
+				}
 			}
 		}
 	}

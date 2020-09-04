@@ -35,10 +35,44 @@
     }
 </script>
 <style lang="scss" scoped>
+    // 竖屏模式
+    @media screen and (orientation:portrait) {
+        .top{
+            height:0.45rem;
+            padding:0 0.24rem;
+            .backImg{
+                width: 0.24rem;
+                left:0.24rem;
+            }
+            .homeIndex{
+                font-size:0.18rem;
+            }
+            .closeImg{
+                width: 0.17rem;
+                right:0.24rem;
+            }
+        }
+    }
+    // 横屏模式
+    @media screen and (orientation:landscape) {
+        .top{
+            height:0.257rem;
+            padding:0 0.137rem;
+            .backImg{
+                width: 0.137rem;
+                left: 0.137rem;
+            }
+            .homeIndex{
+                font-size:0.1028rem;
+            }
+            .closeImg{
+                width: 0.097rem;
+                right: 0.137rem;
+            }
+        }
+    }
     .top{
         width: 100%;
-        height:0.45rem;
-        padding:0 0.24rem;
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -48,21 +82,16 @@
         .backImg{
             display: inline-block;
             position:absolute;
-            left:0.24rem;
-            width: 0.24rem;
             outline: none;
             height: auto;
         }
         .homeIndex{
-            font-size:0.18rem;
             font-weight: bold;
             color:#ffffff;
         }
         .closeImg{
             position:absolute;
-            right:0.24rem;
             display: inline-block;
-            width: 0.17rem;
             outline: none;
             height: auto;
         }
