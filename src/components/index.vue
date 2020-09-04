@@ -130,7 +130,7 @@
 				}
 				.questionList{
 					width:100%;
-					padding:0.29rem 0.15rem 0 0.15rem;
+					padding:0.29rem 0.15rem;
 					box-sizing: border-box;
 					.lineone{
 						width:100%;
@@ -228,5 +228,4 @@
 			}
 		}
 	}
-	
 </style>
