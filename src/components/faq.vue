@@ -22,7 +22,7 @@
 			<div class="faqContent">
 				<!-- 有数据 -->
 				<div class="faqList">
-					<div class="faqItem" v-for="i in 10" @click="faqDetail()">
+					<div class="faqItem" v-for="i in 10" :key="i" @click="faqDetail()">
 						<div class="maxtwoline">
 							<span>
 								ost my accountI l myi account
@@ -42,7 +42,6 @@
 	</div>
 </template>
 <script>
-	import { Button } from 'vant';
 	import Top from '../assets/top'
 	export default {
 		name: 'faq',
@@ -62,8 +61,7 @@
 			}
 		},
 		components:{
-			Top,
-			[Button.name]:Button
+			Top
 		}
 	}
 </script>
@@ -73,7 +71,145 @@
 		height:100%;
 		// 竖屏模式
 		@media screen and (orientation:portrait){
-
+			.faqContain{
+				width: 100%;
+				box-sizing: border-box;
+				padding: 0.22rem 0.24rem 0 0.24rem;
+				.searchLine{
+					width:100%;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					.inputSearch{
+						flex: 1;
+						height:0.45rem;
+						padding:0 0.225rem;
+						box-sizing: border-box;
+						display: flex;
+						align-items: center;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: solid 2px #000000;
+						.searchImg{
+							width: 0.2rem;
+							height:100%;
+							display: flex;
+							align-items: center;
+							img{
+								display: block;
+								width: 0.2rem;
+								height: 0.2rem;
+							}
+						}
+						.inputFaq{
+							flex: 1;
+							height:100%;
+							padding: 0.02rem 0 0.02rem 0.04rem;
+							box-sizing: border-box;
+							input{
+								display: block;
+								width:100%;
+								height: 100%;
+								border: none;
+								font-size: 0.16rem;
+								color: #c3c3c3;
+								font-family: PTsans;
+								&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+									color: #c3c3c3;
+									font-size: 0.16rem;
+								}
+								&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+									color: #c3c3c3;
+									font-size: 0.16rem;
+								}
+								&::-moz-placeholder { /* Mozilla Firefox 19+ */
+									color: #c3c3c3;
+									font-size: 0.16rem;
+								}
+								&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+									color: #c3c3c3;
+									font-size: 0.16rem;
+								}
+							}
+						}
+					}
+					.tickListContain{
+						width:0.55rem;
+						height:0.5rem;
+						margin-left: 0.2rem;
+						img{
+							display: block;
+							width:100%;
+							height:auto;
+						}
+					}
+				}
+				.faqContent{
+					width:100%;
+					padding-bottom:0.2rem;
+					box-sizing: border-box;
+					.nofaq{
+						width: 100%;
+						padding-top:0.39rem;
+						box-sizing: border-box;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						img{
+							margin-bottom:0.175rem;
+							display: block;
+							width:1.225rem;
+							height:auto;
+						}
+						span{
+							font-size: 0.15rem;
+							color: #b3c2dc;
+						}
+					}
+					.faqList{
+						width: 100%;
+						padding:0 0.12rem;
+						margin:0.2rem 0;
+						box-sizing: border-box;
+						border: 2px solid #000000;
+						border-radius: 16px;
+						background:#ffffff;
+						color: #405a89;
+						.faqItem{
+							width:100%;
+							height:0.65rem;
+							border-bottom:1px solid #d7d8d9;
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							font-size: 0.16rem;
+							.maxtwoline{
+								height:100%;
+								padding:0 0.7rem 0 0;
+								box-sizing: border-box;
+								flex:1;
+								display: flex;
+								align-items: center;
+								span{
+									overflow:hidden;
+									text-overflow:-o-ellipsis-lastline;
+									text-overflow:ellipsis;
+									display:-webkit-box;
+									-webkit-line-clamp:2;
+									line-clamp:2;
+									-webkit-box-orient:vertical;
+								}
+							}
+							img{
+								display: block;
+								width: 0.09rem;
+								height:auto;
+							}
+						}
+					}
+				}
+			}			
 		}
 		// 横屏模式
 		@media screen and (orientation:landscape) {
@@ -152,9 +288,11 @@
 				}
 				.faqContent{
 					width:100%;
+					padding-bottom:0.2rem;
+					box-sizing: border-box;
 					.nofaq{
 						width: 100%;
-						padding-top:0.22rem;
+						padding-top:0.15rem;
 						box-sizing: border-box;
 						display: flex;
 						flex-direction: column;
@@ -174,7 +312,7 @@
 					.faqList{
 						width: 100%;
 						padding:0 0.068rem;
-						margin:0.11rem 0;
+						margin-top:0.11rem;
 						box-sizing: border-box;
 						border: 2px solid #000000;
 						border-radius: 16px;
