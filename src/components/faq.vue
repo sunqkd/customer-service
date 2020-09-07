@@ -15,27 +15,30 @@
 				</div>
 				<!-- 跳转到票单列表 -->
 				<div class="tickListContain">
-					<img src="/static/img/support_icon_ticket.png" alt="tickets" @click="goTickList()">
+					<img src="/static/img/support_icon_ticket.png" alt="ticket" @click="goTickList()">
 				</div>
 			</div>
 			<!-- 搜索内容 -->
-			<div>
+			<div class="faqContent">
 				<!-- 有数据 -->
-				<div></div>
+				<div class="faqList">
+					<div class="faqItem" v-for="i in 10" @click="faqDetail()">
+						<div class="maxtwoline">
+							<span>
+								ost my accountI l myi account
+							</span>
+						</div>
+						<img src="/static/img/form_list_arrow.png" alt="">
+					</div>
+				</div>
 				<!-- 无数据 -->
-				<div></div>
+				<div class="nofaq" style="display:none">
+					<img src="/static/img/blank_icon_questions.png" alt="">
+					<span>Sorry, no answer for this question</span>
+					<span>You can contact us for more help</span>
+				</div>
 			</div>
 		</div>
-		
-		<!-- <ul>
-			<li @click="faqDetail()">faq1x</li>
-			<li @click="faqDetail()">faq2x</li>
-			<li @click="faqDetail()">faq3x</li>
-			<li @click="faqDetail()">faq4x</li>
-			<li @click="faqDetail()">faq5x</li>
-			<li @click="faqDetail()">faq6x</li>
-			<li @click="faqDetail()">faq7x</li>
-		</ul> -->
 	</div>
 </template>
 <script>
@@ -147,7 +150,69 @@
 						}
 					}
 				}
-
+				.faqContent{
+					width:100%;
+					.nofaq{
+						width: 100%;
+						padding-top:0.22rem;
+						box-sizing: border-box;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						img{
+							margin-bottom:0.1rem;
+							display: block;
+							width:0.7rem;
+							height:auto;
+						}
+						span{
+							font-size: 0.085rem;
+							color: #b3c2dc;
+						}
+					}
+					.faqList{
+						width: 100%;
+						padding:0 0.068rem;
+						margin:0.11rem 0;
+						box-sizing: border-box;
+						border: 2px solid #000000;
+						border-radius: 16px;
+						background:#ffffff;
+						color: #405a89;
+						.faqItem{
+							width:100%;
+							height:0.37rem;
+							border-bottom:1px solid #d7d8d9;
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							font-size: 0.09rem;
+							.maxtwoline{
+								height:100%;
+								padding:0 0.4rem 0 0;
+								box-sizing: border-box;
+								flex:1;
+								display: flex;
+								align-items: center;
+								span{
+									overflow:hidden;
+									text-overflow:-o-ellipsis-lastline;
+									text-overflow:ellipsis;
+									display:-webkit-box;
+									-webkit-line-clamp:2;
+									line-clamp:2;
+									-webkit-box-orient:vertical;
+								}
+							}
+							img{
+								display: block;
+								width: 0.05rem;
+								height:auto;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
