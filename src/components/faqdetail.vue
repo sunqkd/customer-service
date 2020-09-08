@@ -73,7 +73,77 @@
 		height: 100%;
 		// 竖屏模式
 		@media screen and (orientation:portrait){
-
+			.detailContent{
+				width:100%;
+				padding:0.245rem;
+				box-sizing: border-box;
+				.detailTitle{
+					width: 100%;
+					height:0.455rem;
+					border-bottom:1px solid #b3c2dc;
+					display: flex;
+					align-items: center;
+					font-size: 0.18rem;
+					color: #333333;
+					font-weight: bold;
+					span{
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						overflow: hidden;
+					}
+				}
+				.detailList{
+                   font-size:0.12rem;
+				   width: 100%;
+				   padding-top:0.2rem;
+				   box-sizing: border-box;
+				   font-size: 0.12rem;
+				   color: #333333;
+				   line-height:0.2rem;
+				}
+			}
+			.detailFooter{
+				width:100%;
+				padding:0.13rem 0 0.12rem 0;
+				border-top:1px solid #d7d8d9;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				font-size: 0.15rem;
+				color: #405a89;
+				.footerTitle{
+					margin-bottom: 0.1rem;
+				}
+				.footBtn{
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					span{
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						border-radius: 26px;
+						height:0.255rem;
+						padding:0 0.14rem;
+						border:2px solid #405a89;
+						img{
+							display: block;
+							width:0.14rem;
+							height:0.14rem;
+							margin-right:0.09rem;
+							outline: none;
+						}
+						&.noHelp{
+							border-radius: 12px;
+						}
+						&.rightMargin{
+							margin-right:0.545rem;
+						}
+					}
+				}
+			}
 		}
 		// 横屏模式
 		@media screen and (orientation:landscape) {
