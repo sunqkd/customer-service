@@ -16,7 +16,7 @@
 		<!-- footer -->
 		<div class="detailFooter">
 			<div class="footerTitle">
-				Was this article helpful?
+				{{helpfulFlag?"Was this article helpful?":"This article is not helpful"}}
 			</div>
 			<div class="footBtn">
 				<span class="rightMargin" v-if="helpfulFlag" @click="nohelpful()">
@@ -53,7 +53,7 @@
 			closeDetail(){ // 关闭
 				this.$router.go(-1)
 			},
-			goCreate(){
+			goCreate(){ // 创建订单
 				this.$router.push('/createTicket')
 			}
 		},
