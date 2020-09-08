@@ -23,7 +23,7 @@
 					<img src="/static/img/btn_feedback_icon_no.png" alt="">
 					No
 				</span>
-				<span  v-if="helpfulFlag">
+				<span  v-if="helpfulFlag" @click="helpful()">
 					<img src="/static/img/btn_feedback_icon_yes.png" alt="">
 					Yes
 				</span>
@@ -38,6 +38,7 @@
 	</div>
 </template>
 <script>
+	import { Toast } from 'vant'
 	import Top from '../assets/top'
 	export default {
 		name: 'faqdetail',
@@ -50,6 +51,9 @@
 			nohelpful(){ // 没有帮助
 				this.helpfulFlag = false
 			},
+			helpful(){ // 有帮助
+				Toast.success('Thanks for your feedback');
+			},
 			closeDetail(){ // 关闭
 				this.$router.go(-1)
 			},
@@ -58,7 +62,8 @@
 			}
 		},
 		components:{
-			Top
+			Top,
+			[Toast.name]:Toast
 		}
 	}
 </script>
