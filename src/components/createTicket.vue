@@ -1,8 +1,65 @@
 <template>
-	<div>
+	<div class="createTicket">
 		<Top :backflag="true" :homeflag="true"></Top>
+		<div class="createContain">
+			<!-- title -->
+			<div class="createTitle">
+				<img src="/static/img/blank_icon_feedback.png" alt="">
+				<span>Contact us</span>
+			</div>
+			<!-- email -->
+			<div class="createMail">
+				<span>Email (optional)</span>
+				<input type="text" v-model="form.email" placeholder="mail@ingcreations.com">
+			</div>
+			<!-- question type -->
+			<div class="questionType">
+				<span>Question Type</span>
+				<select v-model="form.type">
+					<option :value="item.value" v-for="(item,index) in typeList" :key="index">{{item.label}}</option>
+				</select>
+			</div>
+			<!-- question content -->
+			<div class="questionContent">
+				<span>Question Content</span>
+				<van-field
+				    class="questionFiled"
+					v-model="form.content"
+					rows="4"
+					autosize
+					type="textarea"
+					maxlength="400"
+					placeholder="I can’t find..."
+					show-word-limit
+				/>
+			</div>
+			<!-- 上传图片 -->
+			<div class="uploadImgContain">
+				<!-- 图片列表 -->
+				<div class="imgWaiting" v-for="(item,index) in form.image" :key="index">
+					<img :src="item" alt="" class="uploadImgItem">
+					<img src="/static/img/form_pic_icon_close.png" alt="" class="delectUpload" @click="delectFormImg(index)">
+				</div>
+				<!-- 上传按钮 -->
+				<van-uploader :after-read="afterRead" multiple class="upbtncontain" v-if="form.image.length < 5">
+					<div v-if="uploadImgFlag" class="uploading">
+						<van-loading type="spinner" color="#1989fa"/>
+					</div>
+					<div v-if="!uploadImgFlag" class="upbtn"></div>
+				</van-uploader>
+			</div>
+			<!-- 发送按钮 -->
+			<div class="sendContain">
+				<div>
+					Send
+				</div>
+			</div>
+		</div>
+
+	<!--  
+		<hr/>
 		<b>创建票单</b>
-		<!-- 邮箱 -->
+		
 		<pre>
 			{{form}}
 		</pre>
@@ -10,25 +67,25 @@
 			<span>邮箱：</span>
 			<input type="text" v-model="form.email">
 		</div>
-	    <!-- 问题类型 -->
+	   
 		<div>
 			<span>问题类型：</span>
 			<select v-model="form.type">
 				<option :value="item.value" v-for="(item,index) in typeList" :key="index">{{item.label}}</option>
 			</select>
 		</div>
-		<!-- 问题内容 -->
+		
 		<div>
 			<span>问题内容：</span>
 			<input type="text" v-model="form.content">
 		</div>
-		<!-- 上传图片 -->
+		
 		<div>
-			<!-- 图片列表 -->
+		
 			<div>
 				<img v-for="(item,index) in form.image" :key="index"  style="width:80px;height:80px" :src="item" alt="">
 			</div>
-			<!-- 上传按钮 -->
+		
 			<van-uploader :after-read="afterRead" multiple>
 				<div v-if="uploadImgFlag">
 					<van-loading type="spinner" color="#1989fa"/>
@@ -36,14 +93,15 @@
 				<button v-if="!uploadImgFlag">点击上传</button>
 			</van-uploader>
 		</div>
-		<!-- 发送 -->
+		
 		<div>
 			<van-button type="primary" @click="send()">发送</van-button>
 		</div>
+		-->
 	</div>
 </template>
 <script>
-	import { Button, Uploader, Toast ,Loading } from 'vant';
+	import { Uploader, Toast ,Loading, Field } from 'vant';
 	import lrz from 'lrz';
 	import Top from '../assets/top'
 	export default {
@@ -54,28 +112,28 @@
 					email:'', // 邮箱
 					type:0, // 问题类型  默认为请选择
 					content:'', // 问题内容
-					image:[] // 问题图片
+					image:['https://img.yzcdn.cn/vant/tree.jpg','https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/apple-1.jpg','https://img.yzcdn.cn/vant/ipad.jpeg','https://img.yzcdn.cn/vant/apple-2.jpg'] // 问题图片
 				},
 				uploadImgFlag:false, // 上传按钮和loading
 				// 问题类型数组
 				typeList:[ 
 					{
-						label:'请选择问题类型',
-						value: 0
+						label:'Choose a type',
+						value:0
 					},{
-						label:'账号',
+						label:'Account',
 						value:1
 					},{
-						label:'充值',
+						label:'Recharge',
 						value:2
 					},{
-						label:'网络',
+						label:'Network',
 						value:3
 					},{
-						label:'bug',
+						label:'Bug',
 						value:4
 					},{
-						label:'其他',
+						label:'Others',
 						value:5
 					}
 				]
@@ -114,10 +172,12 @@
 				})
 
 			},
+
 			send(){ // 发送
 				console.log(this.form)
 				this.createTicket()
 			},
+
 			// 创建工单
 			createTicket(){
 			    let data = {
@@ -142,17 +202,210 @@
 				}).catch((error)=>{
 					console.log(error)
 				})
+			},
+
+			delectFormImg(index){ // 删除图片
+				this.form.image.splice(index, 1)
 			}
 		},
 		components:{
 			Top,
-			[Button.name]:Button,
 			[Uploader.name]:Uploader,
 			[Toast.name]:Toast,
-			[Loading.name]:Loading
+			[Loading.name]:Loading,
+			[Field.name]:Field
 		}
 	}
 </script>
-<style scoped>
-	
+<style lang="scss" scoped>
+	.createTicket{
+		width:100%;
+		height:100%;
+		font-size:0.01rem;
+		// 竖屏模式
+		@media screen and (orientation:portrait){
+
+		}
+		// 横屏模式
+		@media screen and (orientation:landscape){
+			.createContain{
+				width: 100%;
+				padding:0.122rem;
+				box-sizing: border-box;
+				.createTitle{
+					width:100%;
+					display: flex;
+					align-items: center;
+					margin-bottom:0.15rem;
+					font-weight: bold;
+					font-size: 0.15rem;
+					color: #b3c2dc;
+					img{
+						margin-right:0.057rem;
+						display: block;
+						width:0.2rem;
+						height:auto;
+					}
+				}
+				.createMail{
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 0.134rem;
+					span{
+						font-size: 0.091rem;
+						color: #333333;
+						font-weight: bold;
+						margin-bottom: 0.04rem;
+					}
+					input{
+						text-indent: 0.091rem;
+						height: 0.257rem;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: 2px solid  #000000;
+						font-size: 0.091rem;
+						color: #333333;
+						&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+							color: #c3c3c3;
+							font-size: 0.091rem;
+						}
+						&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+							color: #c3c3c3;
+							font-size: 0.091rem;
+						}
+						&::-moz-placeholder { /* Mozilla Firefox 19+ */
+							color: #c3c3c3;
+							font-size: 0.091rem;
+						}
+						&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+							color: #c3c3c3;
+							font-size: 0.091rem;
+						}
+					}
+				}
+				.questionType{
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 0.134rem;
+					span{
+						font-size: 0.091rem;
+						color: #333333;
+						font-weight: bold;
+						margin-bottom: 0.04rem;
+					}
+					select{
+						outline: none;
+						width:100%;
+						box-sizing: border-box;
+						padding-left: 0.091rem;
+						height: 0.257rem;
+						border-radius: 16px;
+						border: 2px solid  #000000;
+						font-size: 0.091rem;
+						color: #333333;
+						appearance:none;
+						-moz-appearance:none;
+						-webkit-appearance:none;
+						background: url('/static/img/form_list_down.png') no-repeat scroll right center transparent;
+						background-color: #ffffff;
+						background-size: 0.088rem 0.051rem;
+						background-position: 98%;
+						&::-ms-expand { display: none; }
+					}
+				}
+				.questionContent{
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 0.157rem;
+					span{
+						font-size: 0.091rem;
+						color: #333333;
+						font-weight: bold;
+						margin-bottom: 0.04rem;
+					}
+					.questionFiled{
+						border-radius: 16px;
+						border: 2px solid  #000000;
+						font-size: 0.091rem;
+						color: #333333;
+					}
+				}
+				.uploadImgContain{
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					.imgWaiting{
+						width:0.61rem;
+						height:0.61rem;
+						margin-bottom: 0.1rem;
+						margin-right:0.06rem;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: 2px solid #000000;
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						position:relative;
+						.uploadImgItem{
+							display: block;
+							width: 100%;
+							border-radius: 16px;
+							height:auto;
+						}
+						.delectUpload{
+							display: block;
+							width:0.17rem;
+							height:0.17rem;
+							position:absolute;
+							top:-0.06rem;
+							right:-0.06rem;
+						}
+					}
+					.upbtncontain{
+						width:0.61rem;
+						height:0.61rem;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: 2px solid #000000;
+						.uploading{
+							width: 0.61rem;
+							height: 0.61rem;
+							border-radius: 16px;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
+						.upbtn{
+							width: 0.61rem;
+							height: 0.61rem;
+							border-radius: 16px;
+							background: url('/static/img/form_pic_icon_add.png') no-repeat scroll center center transparent;
+							background-size: 0.35rem 0.24rem;
+						}
+					}
+				}
+				.sendContain{
+					width: 100%;
+					margin-top:0.145rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					div{
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						width: 0.651rem;
+						height: 0.25rem;
+						background: url('/static/img/form_btn_bg.png') no-repeat scroll center center transparent;
+						background-size: 0.651rem  0.25rem;
+						border-radius: 5px;
+						font-weight: bold;
+						color: #ffffff;
+						font-size: 0.102rem;
+					}
+				}
+			}
+		}
+	}
 </style>
