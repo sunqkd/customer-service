@@ -50,54 +50,11 @@
 			</div>
 			<!-- 发送按钮 -->
 			<div class="sendContain">
-				<div>
+				<div @click="send()">
 					Send
 				</div>
 			</div>
 		</div>
-
-	<!--  
-		<hr/>
-		<b>创建票单</b>
-		
-		<pre>
-			{{form}}
-		</pre>
-		<div>
-			<span>邮箱：</span>
-			<input type="text" v-model="form.email">
-		</div>
-	   
-		<div>
-			<span>问题类型：</span>
-			<select v-model="form.type">
-				<option :value="item.value" v-for="(item,index) in typeList" :key="index">{{item.label}}</option>
-			</select>
-		</div>
-		
-		<div>
-			<span>问题内容：</span>
-			<input type="text" v-model="form.content">
-		</div>
-		
-		<div>
-		
-			<div>
-				<img v-for="(item,index) in form.image" :key="index"  style="width:80px;height:80px" :src="item" alt="">
-			</div>
-		
-			<van-uploader :after-read="afterRead" multiple>
-				<div v-if="uploadImgFlag">
-					<van-loading type="spinner" color="#1989fa"/>
-				</div>
-				<button v-if="!uploadImgFlag">点击上传</button>
-			</van-uploader>
-		</div>
-		
-		<div>
-			<van-button type="primary" @click="send()">发送</van-button>
-		</div>
-		-->
 	</div>
 </template>
 <script>
@@ -221,7 +178,6 @@
 	.createTicket{
 		width:100%;
 		height:100%;
-		font-size:0.01rem;
 		// 竖屏模式
 		@media screen and (orientation:portrait){
 
