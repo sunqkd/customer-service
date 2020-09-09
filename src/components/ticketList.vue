@@ -127,7 +127,100 @@
 		height:100%;
 		// 竖屏模式
 		@media screen and (orientation:portrait) {
-
+			.ticketContain{
+				width:100%;
+				padding:0.305rem 0.24rem 0.5rem 0.24rem;
+				box-sizing: border-box;
+				.ticketFooter{
+					position: fixed;
+					left: 0;
+					bottom: 0;
+					z-index: 1;
+					width:100%;
+					height:0.65rem;
+					padding:0 0.24rem;
+					border-top: 1px solid #d7d8d9;
+					box-sizing: border-box;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					font-size: 0.15rem;
+					color: #405a89;
+					background:#d9e7f1;
+					.contactUs{
+						display: inline-flex;
+						justify-content: center;
+						align-items: center;
+						box-sizing: border-box;
+						width: 1rem;
+						height: 0.35rem;
+						border-radius: 0.08rem;
+						border: 2px solid #405a89;
+					}
+				}
+				.noTickets{
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					font-size: 0.15rem;
+					color: #b3c2dc;
+					font-weight: bold;
+					img{
+						margin-bottom:0.14rem;
+						display: block;
+						width:1.51rem;
+						height:auto;
+					}
+				}
+				.ticketList{
+					width:100%;
+					.ticketTitle{
+						width:100%;
+						height:0.46rem;
+						display: flex;
+						align-items: center;
+						border-bottom:1px solid #b3c2dc;
+						box-sizing: border-box;
+						span{
+							display: inline-block;
+							color: #333333;
+							font-size: 0.16rem;
+							font-weight:bold;
+							width:33.33%;
+						}
+					}
+					.ticketReplied{
+						width:100%;
+						height:0.55rem;
+						display: flex;
+						align-items: center;
+						color: #405a89;
+						span{
+							font-size: 0.16rem;
+							display: inline-block;
+							width:33.33%;
+							font-weight: bold;
+						}
+						.newReply{
+							color: #b3c2dc;
+							text-align: right;
+						}
+					}
+					.ticketwait{
+						width:100%;
+						height:0.55rem;
+						display: flex;
+						align-items: center;
+						color: #333333;
+						span{
+							font-size: 0.16rem;
+							display: inline-block;
+							width:33.33%;
+						}
+					}
+				}
+			}
 		}
 		// 横屏模式
 		@media screen and (orientation:landscape){
