@@ -129,7 +129,7 @@
 		@media screen and (orientation:portrait) {
 			.ticketContain{
 				width:100%;
-				padding:0.305rem 0.24rem 0.5rem 0.24rem;
+				padding:0.305rem 0.24rem 1rem 0.24rem;
 				box-sizing: border-box;
 				.ticketFooter{
 					position: fixed;
