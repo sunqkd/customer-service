@@ -4,34 +4,54 @@
 		<div class="ticketContain">
 			<!-- 有数据 -->
 			<div class="ticketList">
-
+				<!-- 标题 -->
+				<div class="ticketTitle">
+					<span>Current Feedback</span>
+					<span>Feedback Time</span>
+				</div>
+				<!-- 有新回复 -->
+				<div class="ticketReplied" @click="goTicketDetail(item.id)">
+					<span>
+						Ticket 222233333
+					</span>
+					<span>
+						2020/08/01 12:34:56
+					</span>
+					<span class="newReply">
+						New Reply
+					</span>
+				</div>
+				<!-- 待回复 -->
+				<div class="ticketwait" @click="goTicketDetail(item.id)">
+					<span>
+						Ticket 222233333
+					</span>
+					<span>
+						2020/08/01 12:34:56
+					</span>
+				</div>
 			</div>
 			<!-- 无数据 -->
-			<div class="noTickets">
-
+			<div class="noTickets" style="display:none">
+				<img src="/static/img/blank_icon_feedback.png" alt="">
+				<span>You can contact us for more help </span>
 			</div>
 			<!-- 联系我们 -->
 			<div class="ticketFooter">
-				<span>History Feedback</span>
-				<span class="contactUs">Contact us</span>
+				<span @click="gohistory()">History Feedback</span>
+				<span class="contactUs" @click="linkCustomer()">Contact us</span>
 			</div>
 		</div>
-
-		<!-- <b>票单列表</b>
-		<ul>
-		
-			<li v-for="(item,index) in repliedTicketList" :key="index + 'a'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-		
-			<li v-for="(item,index) in waitReplyTicketList" :key="index + 'b'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-		</ul>
-		<div>
-			<van-button type="danger" @click="gohistory()">历史反馈</van-button>
-			<van-button type="danger" @click="linkCustomer()">联系客服</van-button>
-		</div> -->
+		<!-- 
+			<b>票单列表</b>
+			<ul>
+				<li v-for="(item,index) in repliedTicketList" :key="index + 'a'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
+				<li v-for="(item,index) in waitReplyTicketList" :key="index + 'b'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
+			</ul>
+		-->
 	</div>
 </template>
 <script>
-	import { Button } from 'vant';
 	import Top from '../assets/top'
 	export default {
 		name: 'ticketList',
@@ -42,8 +62,8 @@
 			}
 		},
 		created(){
-			this.getRepliedTicketList()
-			this.getwaitReplyTicketList()
+			// this.getRepliedTicketList()
+			// this.getwaitReplyTicketList()
 		},
 		methods:{
 			// 查询已回复的工单
@@ -97,8 +117,7 @@
 
 		},
 		components:{
-			Top,
-			[Button.name]:Button
+			Top
 		}
 	}
 </script>
@@ -106,7 +125,6 @@
 	.ticketList{
 		width: 100%;
 		height:100%;
-		
 		// 竖屏模式
 		@media screen and (orientation:portrait) {
 
@@ -115,7 +133,7 @@
 		@media screen and (orientation:landscape){
 			.ticketContain{
 				width:100%;
-				padding:0.174rem 0.132rem 0.375rem 0.174rem;
+				padding:0.174rem 0.132rem 0.5rem 0.174rem;
 				box-sizing: border-box;
 				.ticketFooter{
 					position: fixed;
@@ -132,6 +150,7 @@
 					justify-content: space-between;
 					font-size: 0.0857rem;
 					color: #405a89;
+					background:#d9e7f1;
 					.contactUs{
 						display: inline-flex;
 						justify-content: center;
@@ -141,6 +160,68 @@
 						height: 0.2rem;
 						border-radius: 0.0457rem;
 						border: 2px solid #405a89;
+					}
+				}
+				.noTickets{
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					font-size: 0.0857rem;
+					color: #b3c2dc;
+					font-weight: bold;
+					img{
+						margin-bottom:0.08rem;
+						display: block;
+						width:0.863rem;
+						height:auto;
+					}
+				}
+				.ticketList{
+					width:100%;
+					.ticketTitle{
+						width:100%;
+						height:0.269rem;
+						display: flex;
+						align-items: center;
+						border-bottom:1px solid #b3c2dc;
+						box-sizing: border-box;
+						span{
+							display: inline-block;
+							width:33.3%;
+							color: #333333;
+							font-size: 0.091rem;
+							font-weight:bold;
+						}
+					}
+					.ticketReplied{
+						width:100%;
+						height:0.269rem;
+						display: flex;
+						align-items: center;
+						color: #405a89;
+						span{
+							font-size: 0.091rem;
+							display: inline-block;
+							width:33.3%;
+							font-weight: bold;
+						}
+						.newReply{
+							color: #b3c2dc;
+							text-align: right;
+						}
+					}
+					.ticketwait{
+						width:100%;
+						height:0.269rem;
+						display: flex;
+						align-items: center;
+						color: #333333;
+						span{
+							font-size: 0.091rem;
+							display: inline-block;
+							width:33.3%;
+						}
 					}
 				}
 			}
