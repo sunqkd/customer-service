@@ -150,7 +150,7 @@
 						height:1.03rem;
 						background:#ffffff;
 						border: solid 2px #000000;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						box-sizing: border-box;
 						display:flex;
 						flex-direction: column;
@@ -210,7 +210,7 @@
 						height:0.7rem;
 						background:#ffffff;
 						border: solid 2px #000000;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						box-sizing: border-box;
 						display:flex;
 						flex-direction: column;

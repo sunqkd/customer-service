@@ -1,18 +1,33 @@
 <template>
-	<div>
+	<div class="ticketList">
 		<Top :backflag="true" :homeflag="true"></Top>
-		<b>票单列表</b>
+		<div class="ticketContain">
+			<!-- 有数据 -->
+			<div class="ticketList">
+
+			</div>
+			<!-- 无数据 -->
+			<div class="noTickets">
+
+			</div>
+			<!-- 联系我们 -->
+			<div class="ticketFooter">
+				<span>History Feedback</span>
+				<span class="contactUs">Contact us</span>
+			</div>
+		</div>
+
+		<!-- <b>票单列表</b>
 		<ul>
-			<!-- 当前的反馈 -->
-			<!-- 已回复2   -->
+		
 			<li v-for="(item,index) in repliedTicketList" :key="index + 'a'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-			<!-- 显示待回复1 和 -->
+		
 			<li v-for="(item,index) in waitReplyTicketList" :key="index + 'b'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
 		</ul>
 		<div>
 			<van-button type="danger" @click="gohistory()">历史反馈</van-button>
 			<van-button type="danger" @click="linkCustomer()">联系客服</van-button>
-		</div>
+		</div> -->
 	</div>
 </template>
 <script>
@@ -87,6 +102,48 @@
 		}
 	}
 </script>
-<style scoped>
-	
+<style lang="scss" scoped>
+	.ticketList{
+		width: 100%;
+		height:100%;
+		
+		// 竖屏模式
+		@media screen and (orientation:portrait) {
+
+		}
+		// 横屏模式
+		@media screen and (orientation:landscape){
+			.ticketContain{
+				width:100%;
+				padding:0.174rem 0.132rem 0.375rem 0.174rem;
+				box-sizing: border-box;
+				.ticketFooter{
+					position: fixed;
+					left: 0;
+					bottom: 0;
+					z-index: 1;
+					width:100%;
+					height:0.37rem;
+					padding:0 0.137rem;
+					border-top: 1px solid #d7d8d9;
+					box-sizing: border-box;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					font-size: 0.0857rem;
+					color: #405a89;
+					.contactUs{
+						display: inline-flex;
+						justify-content: center;
+						align-items: center;
+						box-sizing: border-box;
+						width: 0.57rem;
+						height: 0.2rem;
+						border-radius: 0.0457rem;
+						border: 2px solid #405a89;
+					}
+				}
+			}
+		}
+	}
 </style>

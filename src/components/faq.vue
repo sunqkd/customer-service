@@ -88,7 +88,7 @@
 						display: flex;
 						align-items: center;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						border: solid 2px #000000;
 						.searchImg{
 							width: 0.2rem;
@@ -173,7 +173,7 @@
 						margin:0.2rem 0;
 						box-sizing: border-box;
 						border: 2px solid #000000;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						background:#ffffff;
 						color: #405a89;
 						.faqItem{
@@ -230,7 +230,7 @@
 						display: flex;
 						align-items: center;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						border: solid 2px #000000;
 						.searchImg{
 							width: 0.11rem;
@@ -315,7 +315,7 @@
 						margin-top:0.11rem;
 						box-sizing: border-box;
 						border: 2px solid #000000;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						background:#ffffff;
 						color: #405a89;
 						.faqItem{

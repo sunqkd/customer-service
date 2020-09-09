@@ -213,7 +213,7 @@
 						text-indent:0.215rem;
 						height: 0.45rem;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						border: 2px solid  #000000;
 						font-size:0.16rem;
 						color: #333333;
@@ -251,7 +251,7 @@
 						box-sizing: border-box;
 						padding-left: 0.195rem;
 						height: 0.45rem;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						border: 2px solid  #000000;
 						font-size: 0.16rem;
 						color: #333333;
@@ -277,7 +277,7 @@
 						margin-bottom: 0.07rem;
 					}
 					.questionFiled{
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						border: 2px solid  #000000;
 						font-size: 0.16rem;
 						color: #333333;
@@ -293,7 +293,7 @@
 						margin-bottom: 0.1rem;
 						margin-right:0.08rem;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						border: 2px solid #000000;
 						display: inline-flex;
 						align-items: center;
@@ -302,7 +302,7 @@
 						.uploadImgItem{
 							display: block;
 							width: 100%;
-							border-radius: 16px;
+							border-radius: 0.08rem;
 							height:auto;
 						}
 						.delectUpload{
@@ -318,12 +318,12 @@
 						width:0.98rem;
 						height:0.98rem;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.08rem;
 						border: 2px solid #000000;
 						.uploading{
 							width: 0.98rem;
 							height: 0.98rem;
-							border-radius: 16px;
+							border-radius: 0.08rem;
 							display: flex;
 							align-items: center;
 							justify-content: center;
@@ -331,7 +331,7 @@
 						.upbtn{
 							width: 0.98rem;
 							height: 0.98rem;
-							border-radius: 16px;
+							border-radius: 0.08rem;
 							background: url('/static/img/form_pic_icon_add.png') no-repeat scroll center center transparent;
 							background-size: 0.60rem 0.42rem;
 						}
@@ -394,7 +394,7 @@
 						text-indent: 0.091rem;
 						height: 0.257rem;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						border: 2px solid  #000000;
 						font-size: 0.091rem;
 						color: #333333;
@@ -432,7 +432,7 @@
 						box-sizing: border-box;
 						padding-left: 0.091rem;
 						height: 0.257rem;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						border: 2px solid  #000000;
 						font-size: 0.091rem;
 						color: #333333;
@@ -458,7 +458,7 @@
 						margin-bottom: 0.04rem;
 					}
 					.questionFiled{
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						border: 2px solid  #000000;
 						font-size: 0.091rem;
 						color: #333333;
@@ -474,7 +474,7 @@
 						margin-bottom: 0.1rem;
 						margin-right:0.06rem;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						border: 2px solid #000000;
 						display: inline-flex;
 						align-items: center;
@@ -483,7 +483,7 @@
 						.uploadImgItem{
 							display: block;
 							width: 100%;
-							border-radius: 16px;
+							border-radius: 0.0457rem;
 							height:auto;
 						}
 						.delectUpload{
@@ -499,12 +499,12 @@
 						width:0.61rem;
 						height:0.61rem;
 						background-color: #ffffff;
-						border-radius: 16px;
+						border-radius: 0.0457rem;
 						border: 2px solid #000000;
 						.uploading{
 							width: 0.61rem;
 							height: 0.61rem;
-							border-radius: 16px;
+							border-radius: 0.0457rem;
 							display: flex;
 							align-items: center;
 							justify-content: center;
@@ -512,7 +512,7 @@
 						.upbtn{
 							width: 0.61rem;
 							height: 0.61rem;
-							border-radius: 16px;
+							border-radius: 0.0457rem;
 							background: url('/static/img/form_pic_icon_add.png') no-repeat scroll center center transparent;
 							background-size: 0.35rem 0.24rem;
 						}
