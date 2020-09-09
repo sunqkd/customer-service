@@ -69,7 +69,7 @@
 					email:'', // 邮箱
 					type:0, // 问题类型  默认为请选择
 					content:'', // 问题内容
-					image:['https://img.yzcdn.cn/vant/tree.jpg','https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/apple-1.jpg','https://img.yzcdn.cn/vant/ipad.jpeg','https://img.yzcdn.cn/vant/apple-2.jpg'] // 问题图片
+					image:[] // 问题图片
 				},
 				uploadImgFlag:false, // 上传按钮和loading
 				// 问题类型数组
@@ -180,7 +180,184 @@
 		height:100%;
 		// 竖屏模式
 		@media screen and (orientation:portrait){
-
+			.createContain{
+				width: 100%;
+				padding:0.225rem;
+				box-sizing: border-box;
+				.createTitle{
+					width:100%;
+					display: flex;
+					align-items: center;
+					margin-bottom:0.265rem;
+					font-weight: bold;
+					font-size: 0.26rem;
+					color: #b3c2dc;
+					img{
+						margin-right:0.095rem;
+						display: block;
+						width:0.35rem;
+						height:auto;
+					}
+				}
+				.createMail{
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 0.265rem;
+					span{
+						font-size: 0.16rem;
+						color: #333333;
+						font-weight: bold;
+						margin-bottom: 0.07rem;
+					}
+					input{
+						text-indent:0.215rem;
+						height: 0.45rem;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: 2px solid  #000000;
+						font-size:0.16rem;
+						color: #333333;
+						&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+							color: #c3c3c3;
+							font-size:0.16rem;
+						}
+						&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+							color: #c3c3c3;
+							font-size:0.16rem;
+						}
+						&::-moz-placeholder { /* Mozilla Firefox 19+ */
+							color: #c3c3c3;
+							font-size:0.16rem;
+						}
+						&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+							color: #c3c3c3;
+							font-size:0.16rem;
+						}
+					}
+				}
+				.questionType{
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 0.265rem;
+					span{
+						font-size: 0.16rem;
+						color: #333333;
+						font-weight: bold;
+						margin-bottom: 0.07rem;
+					}
+					select{
+						outline: none;
+						width:100%;
+						box-sizing: border-box;
+						padding-left: 0.195rem;
+						height: 0.45rem;
+						border-radius: 16px;
+						border: 2px solid  #000000;
+						font-size: 0.16rem;
+						color: #333333;
+						appearance:none;
+						-moz-appearance:none;
+						-webkit-appearance:none;
+						background: url('/static/img/form_list_down.png') no-repeat scroll right center transparent;
+						background-color: #ffffff;
+						background-size: 0.15rem 0.09rem;
+						background-position: 98%;
+						&::-ms-expand { display: none; }
+					}
+				}
+				.questionContent{
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 0.265rem;
+					span{
+						font-size: 0.16rem;
+						color: #333333;
+						font-weight: bold;
+						margin-bottom: 0.07rem;
+					}
+					.questionFiled{
+						border-radius: 16px;
+						border: 2px solid  #000000;
+						font-size: 0.16rem;
+						color: #333333;
+					}
+				}
+				.uploadImgContain{
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					.imgWaiting{
+						width:0.98rem;
+						height:0.98rem;
+						margin-bottom: 0.1rem;
+						margin-right:0.08rem;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: 2px solid #000000;
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						position:relative;
+						.uploadImgItem{
+							display: block;
+							width: 100%;
+							border-radius: 16px;
+							height:auto;
+						}
+						.delectUpload{
+							display: block;
+							width:0.25rem;
+							height:0.25rem;
+							position:absolute;
+							top:-0.1rem;
+							right:-0.1rem;
+						}
+					}
+					.upbtncontain{
+						width:0.98rem;
+						height:0.98rem;
+						background-color: #ffffff;
+						border-radius: 16px;
+						border: 2px solid #000000;
+						.uploading{
+							width: 0.98rem;
+							height: 0.98rem;
+							border-radius: 16px;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
+						.upbtn{
+							width: 0.98rem;
+							height: 0.98rem;
+							border-radius: 16px;
+							background: url('/static/img/form_pic_icon_add.png') no-repeat scroll center center transparent;
+							background-size: 0.60rem 0.42rem;
+						}
+					}
+				}
+				.sendContain{
+					width: 100%;
+					margin-top:0.315rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					div{
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						width: 1.14rem;
+						height: 0.45rem;
+						background: url('/static/img/form_btn_bg.png') no-repeat scroll center center transparent;
+						background-size: 1.14rem  0.45rem;
+						border-radius: 5px;
+						font-weight: bold;
+						color: #ffffff;
+						font-size: 0.18rem;
+					}
+				}
+			}
 		}
 		// 横屏模式
 		@media screen and (orientation:landscape){
