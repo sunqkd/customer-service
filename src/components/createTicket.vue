@@ -37,7 +37,7 @@
 			<div class="uploadImgContain">
 				<!-- 图片列表 -->
 				<div class="imgWaiting" v-for="(item,index) in form.image" :key="index">
-					<img :src="item" alt="" class="uploadImgItem">
+					<img :src="item" alt="" class="uploadImgItem" @click="sceneImg(imgs,index)">
 					<img src="/static/img/form_pic_icon_close.png" alt="" class="delectUpload" @click="delectFormImg(index)">
 				</div>
 				<!-- 上传按钮 -->
@@ -58,7 +58,7 @@
 	</div>
 </template>
 <script>
-	import { Uploader, Toast ,Loading, Field } from 'vant';
+	import { Uploader, Toast ,Loading, Field, ImagePreview } from 'vant';
 	import lrz from 'lrz';
 	import Top from '../assets/top'
 	export default {
@@ -69,7 +69,7 @@
 					email:'', // 邮箱
 					type:0, // 问题类型  默认为请选择
 					content:'', // 问题内容
-					image:[] // 问题图片
+					image:['https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/leaf.jpg'] // 问题图片
 				},
 				uploadImgFlag:false, // 上传按钮和loading
 				// 问题类型数组
@@ -100,6 +100,15 @@
 			
 		},
 		methods:{
+			// 预览图片
+			sceneImg(images,index) {
+				ImagePreview({
+					images:this.form.image, //需要预览的图片 URL 数组
+					showIndex:true, //是否显示页码
+					loop:false, //是否开启循环播放
+					startPosition:index //图片预览起始位置索引
+				})
+			},
 			// 上传图片回调函数
 			afterRead(fileImg){
 				this.uploadImgFlag = true; // 上传loading
@@ -170,7 +179,8 @@
 			[Uploader.name]:Uploader,
 			[Toast.name]:Toast,
 			[Loading.name]:Loading,
-			[Field.name]:Field
+			[Field.name]:Field,
+			[ImagePreview.name]:ImagePreview
 		}
 	}
 </script>
