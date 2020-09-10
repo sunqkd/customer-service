@@ -298,7 +298,279 @@
 		height:100%;
 		// 竖屏模式
 		@media screen and (orientation:portrait){
-
+			.ticketdetailContain{
+				width:100%;
+				padding-bottom: 0.5rem;
+				.detailTitle{
+					width: 100%;
+					height: 0.64rem;
+					padding:0 0.235rem;
+					box-sizing: border-box;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					font-size: 0.15rem;
+					color: #405a89;
+				}
+				.chatOutContain{
+					width: 100%;
+					box-sizing: border-box;
+					.chatList{
+						width:100%;
+						.timeandHeros{
+							width: 100%;
+							height: 0.4rem;
+							padding:0 0.26rem;
+							box-sizing: border-box;
+							background-color: #b3c2dc;
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							.hero{
+								font-size: 0.16rem;
+								font-weight: bold;
+								color: #333333;
+							}
+							.serverTime{
+								font-size: 0.15rem;
+								color: #333333;
+							}
+						}
+						.chatContent{
+							width: 100%;
+							padding: 0.185rem 0.265rem 0.24rem 0.265rem;
+							box-sizing: border-box;
+							.chatText{
+								width: 100%;
+								margin-bottom: 0.15rem;
+								color: #333333;
+								font-size: 0.12rem;
+								line-height: 0.2rem;
+							}
+							.chatImg{
+								display: flex;
+								align-items: center;
+								flex-wrap: wrap;
+								.chatimgContain{
+									width:1.02rem;
+									height:1.02rem;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									box-sizing: border-box;
+									background-color: #ffffff;
+									border-radius: 0.08rem;
+									border:2px solid #000000;
+									overflow: hidden;
+									margin-right: 0.05rem;
+									margin-bottom: 0.05rem;
+								}
+								img{
+									display: block;
+									width:1.02rem;
+									height:auto;
+								}
+							}
+						}
+					}
+				}
+				.replyMessage{
+					width: 100%;
+					border-top: 1px solid #d7d8d9;
+					height: 0.65rem;
+		            position: fixed;
+					left: 0;
+					bottom: 0;
+					background:#d9e7f1;
+					font-size: 0.15rem;
+					.replayStar{
+						width: 100%;
+						height: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						span{
+							display: inline-flex;
+							align-items: center;
+							height: 0.35rem;
+							padding:0 0.11rem;
+							border: 2px solid #405a89;
+							box-sizing: border-box;
+							border-radius: 0.08rem;
+							&.problemBtn{
+								color: #405a89;
+								margin-right:0.52rem;
+							}
+							&.replyBtn{
+								background-color: #405a89;
+								color: #ffffff;
+							}
+						}
+					}
+					.replayAnswer{
+						width: 100%;
+						height: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding: 0 0.235rem;
+						box-sizing: border-box;
+						span{
+							display: inline-flex;
+							align-items: center;
+							&.cancelBtn{
+								color: #405a89;
+							}
+							&.sendBtn{
+								height: 0.35rem;
+								padding:0 0.33rem;
+								border: 2px solid #405a89;
+								box-sizing: border-box;
+								border-radius: 0.08rem;
+								background-color: #405a89;
+								color: #ffffff;
+							}
+						}
+					}
+				}
+				.inputFiled{
+					width: 100%;
+					.filedTitle{
+						width: 100%;
+						height: 0.4rem;
+						padding: 0 0.26rem;
+						box-sizing: border-box;
+						background-color: #b3c2dc;
+						display: flex;
+						align-items: center;
+						font-size: 0.16rem;
+						font-weight: bold;
+						color: #333333;
+					}
+					.filedContent{
+						width: 100%;
+						padding:0.23rem;
+						box-sizing: border-box;
+						.vantFiledOut{
+							width:100%;
+							margin-bottom: 0.15rem;
+							.filedText{
+								border-radius: 0.08rem;
+								border: 2px solid  #000000;
+								font-size: 0.16rem;
+								color: #333333;
+							}
+						}
+						.uploadImgContain{
+							width: 100%;
+							display: flex;
+							flex-wrap: wrap;
+							.imgWaiting{
+								width:0.95rem;
+								height:0.95rem;
+								margin-bottom: 0.1rem;
+								margin-right:0.1rem;
+								background-color: #ffffff;
+								border-radius: 0.08rem;
+								border: 2px solid #000000;
+								display: inline-flex;
+								align-items: center;
+								justify-content: center;
+								position:relative;
+								.uploadImgItem{
+									display: block;
+									width: 100%;
+									border-radius: 0.08rem;
+									height:auto;
+								}
+								.delectUpload{
+									display: block;
+									width:0.25rem;
+									height:0.25rem;
+									position:absolute;
+									top:-0.1rem;
+									right:-0.1rem;
+								}
+							}
+							.upbtncontain{
+								width:0.95rem;
+								height:0.95rem;
+								background-color: #ffffff;
+								border-radius: 0.08rem;
+								border: 2px solid #000000;
+								.uploading{
+									width: 0.95rem;
+									height: 0.95rem;
+									border-radius: 0.08rem;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+								}
+								.upbtn{
+									width: 0.95rem;
+									height: 0.95rem;
+									border-radius: 0.08rem;
+									background: url('/static/img/form_pic_icon_add.png') no-repeat scroll center center transparent;
+									background-size: 0.60rem 0.42rem;
+								}
+							}
+						}
+					}
+				}
+			}
+			.starOut{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+				width: 100%;
+				.starContain{
+					width: 2.9rem;
+					background-color: #ffffff;
+					border-radius: 0.08rem;
+					padding:0.19rem 0;
+					box-sizing: border-box;
+					.starValue{
+						width: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 0.32rem;
+						margin-bottom: 0.16rem;
+					}
+					.starText{
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						font-size: 0.13rem;
+						color: #333333;
+						line-height:0.18rem;
+						margin-bottom: 0.15rem;
+					}
+					.startBtn{
+						width: 100%;
+						padding:0 0.255rem;
+						box-sizing: border-box;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						font-size: 0.15rem;
+						span{
+							color: #405a89;
+							&.submitBtn{
+								display: inline-flex;
+								align-items: center;
+								height:0.35rem;
+								padding:0 0.265rem;
+								color: #ffffff;
+								background-color: #405a89;
+								border-radius: 0.08rem;
+							}
+						}
+					}
+				}
+			}
 		}
 		// 横屏模式
 		@media screen and (orientation:landscape){
@@ -364,7 +636,7 @@
 									box-sizing: border-box;
 									background-color: #ffffff;
 									border-radius: 0.0457rem;
-									border: solid 2px #000000;
+									border: 2px solid #000000;
 									overflow: hidden;
 									margin-right: 0.05rem;
 									margin-bottom: 0.05rem;
@@ -427,7 +699,7 @@
 							}
 							&.sendBtn{
 								height: 0.2rem;
-								padding:0 0.0657rem;
+								padding:0 0.1886rem;
 								border: 2px solid #405a89;
 								box-sizing: border-box;
 								border-radius: 0.034rem;
@@ -530,10 +802,9 @@
 				width: 100%;
 				.starContain{
 					width: 1.657rem;
-					height: 0.95rem;
 					background-color: #ffffff;
 					border-radius: 0.0457rem;
-					padding-top:0.1rem;
+					padding:0.1rem 0;
 					box-sizing: border-box;
 					.starValue{
 						width: 100%;
@@ -562,7 +833,6 @@
 						justify-content: space-between;
 						font-size: 0.0875rem;
 						span{
-							font-size: 0.0857rem;
 							color: #405a89;
 							&.submitBtn{
 								display: inline-flex;
