@@ -46,8 +46,38 @@
 				</div>
 			</div>
 			<!-- 回复消息输入框 -->
-			<div>
-				
+			<div class="inputFiled" v-if="listFlag">
+				<div class="filedTitle">
+					Reply Message
+				</div>
+				<div class="filedContent">
+					<div class="vantFiledOut">
+						<van-field
+							class="filedText"
+							v-model="form.content"
+							rows="4"
+							autosize
+							type="textarea"
+							maxlength="400"
+							placeholder="I can’t find..."
+							show-word-limit
+						/>
+					</div>
+					<div class="uploadImgContain">
+						<!-- 图片列表 -->
+						<div class="imgWaiting" v-for="(item,index) in form.image" :key="index">
+							<img :src="item" alt="" class="uploadImgItem">
+							<img src="/static/img/form_pic_icon_close.png" alt="" class="delectUpload" @click="delectFormImg(index)">
+						</div>
+						<!-- 上传按钮 -->
+						<van-uploader :after-read="afterRead" multiple class="upbtncontain" v-if="form.image.length < 5">
+							<div v-if="uploadImgFlag" class="uploading">
+								<van-loading type="spinner" color="#1989fa"/>
+							</div>
+							<div v-if="!uploadImgFlag" class="upbtn"></div>
+						</van-uploader>
+					</div>
+				</div>
 			</div>
 			<!-- footer -->
 			<div class="replyMessage">
@@ -118,9 +148,10 @@
 	</div>
 </template>
 <script>
-	import { Button,Uploader,Toast, Overlay, Rate} from 'vant';
+	import { Button,Uploader,Toast, Overlay, Rate, Field , Loading} from 'vant';
 	import url from 'url'
 	import Top from '../assets/top'
+	import lrz from 'lrz';
 	export default {
 		name: 'ticketDetail',
 		data() {
@@ -128,8 +159,9 @@
 				ticketId:'', // 票单id
 				form:{
 					content:'', // 回复内容
-					image:'', // 添加的图片
+					image:['https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg'], // 添加的图片
 				},
+				uploadImgFlag:false, // 上传loading
 				fileList:[
 					{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }
 				],
@@ -145,6 +177,38 @@
 			// this.getRecodeList()
 		},
 		methods:{
+			// 删除上传图片
+			delectFormImg(index){
+				this.form.image.splice(index, 1)
+			},
+			// 上传图片回调函数
+			afterRead(fileImg){
+				this.uploadImgFlag = true; // 上传loading
+				fileImg.status = 'uploading';
+      			fileImg.message = '上传中...';
+				var fd = new FormData();
+				// 压缩图片在上传
+				lrz(fileImg.file,{ quality: 0.6 }).then((rst)=>{
+					fd.append('file',rst.file,fileImg.file.name)
+					var config = {
+						headers: {
+							'Content-Type': 'multipart/form-data;boundary'
+						}
+					}
+					this.$axios.post('/api/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
+						if(res.data.code == 0){
+							Toast.success('上传成功');
+							console.log(res);
+							this.form.image.push(res.data.data);
+						}else{
+							Toast.fail(res.data.message);
+						}
+						this.uploadImgFlag = false
+					})
+				}).catch((error)=>{
+					console.log(error)
+				})
+			},
 			// 显示评分
 			showScore(){
 				this.startFlag = true
@@ -171,13 +235,18 @@
 					}
 				})
 			},
-			// 上传图片
-			afterRead(file){
-				console.log(file)
-			},
 			// 回复信息
 			reply(){
-				this.listFlag = true
+				this.listFlag = true;
+				setTimeout(()=>{
+					var t = this.documentHeight()
+					window.scroll({top:t,left:0,behavior:'smooth' })
+				},0)
+			},
+			//获取页面文档的总高度
+			documentHeight(){
+				//现代浏览器（IE9+和其他浏览器）和IE8的document.body.scrollHeight和document.documentElement.scrollHeight都可以
+				return Math.max(document.body.scrollHeight,document.documentElement.scrollHeight);
 			},
 			// 取消回复 
 			cancelReply(){
@@ -217,7 +286,9 @@
 			[Toast.name]:Toast,
 			[Uploader.name]:Uploader,
 			[Overlay.name]:Overlay,
-			[Rate.name]:Rate
+			[Rate.name]:Rate,
+			[Field.name]:Field,
+			[Loading.name]:Loading
 		}
 	}
 </script>
@@ -233,6 +304,7 @@
 		@media screen and (orientation:landscape){
 			.ticketdetailContain{
 				width:100%;
+				padding-bottom: 0.5rem;
 				.detailTitle{
 					width: 100%;
 					height: 0.366rem;
@@ -247,7 +319,6 @@
 				.chatOutContain{
 					width: 100%;
 					box-sizing: border-box;
-					padding-bottom: 0.5rem;
 					.chatList{
 						width:100%;
 						.timeandHeros{
@@ -362,6 +433,90 @@
 								border-radius: 0.034rem;
 								background-color: #405a89;
 								color: #ffffff;
+							}
+						}
+					}
+				}
+				.inputFiled{
+					width: 100%;
+					.filedTitle{
+						width: 100%;
+						height: 0.228rem;
+						padding: 0 0.137rem;
+						box-sizing: border-box;
+						background-color: #b3c2dc;
+						display: flex;
+						align-items: center;
+						font-size: 0.091rem;
+						font-weight: bold;
+						color: #333333;
+					}
+					.filedContent{
+						width: 100%;
+						padding:0.1314rem;
+						box-sizing: border-box;
+						.vantFiledOut{
+							width:100%;
+							margin-bottom: 0.0857rem;
+							.filedText{
+								border-radius: 0.0457rem;
+								border: 2px solid  #000000;
+								font-size: 0.091rem;
+								color: #333333;
+							}
+						}
+						.uploadImgContain{
+							width: 100%;
+							display: flex;
+							flex-wrap: wrap;
+							.imgWaiting{
+								width:0.61rem;
+								height:0.61rem;
+								margin-bottom: 0.1rem;
+								margin-right:0.06rem;
+								background-color: #ffffff;
+								border-radius: 0.0457rem;
+								border: 2px solid #000000;
+								display: inline-flex;
+								align-items: center;
+								justify-content: center;
+								position:relative;
+								.uploadImgItem{
+									display: block;
+									width: 100%;
+									border-radius: 0.0457rem;
+									height:auto;
+								}
+								.delectUpload{
+									display: block;
+									width:0.17rem;
+									height:0.17rem;
+									position:absolute;
+									top:-0.06rem;
+									right:-0.06rem;
+								}
+							}
+							.upbtncontain{
+								width:0.61rem;
+								height:0.61rem;
+								background-color: #ffffff;
+								border-radius: 0.0457rem;
+								border: 2px solid #000000;
+								.uploading{
+									width: 0.61rem;
+									height: 0.61rem;
+									border-radius: 0.0457rem;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+								}
+								.upbtn{
+									width: 0.61rem;
+									height: 0.61rem;
+									border-radius: 0.0457rem;
+									background: url('/static/img/form_pic_icon_add.png') no-repeat scroll center center transparent;
+									background-size: 0.35rem 0.24rem;
+								}
 							}
 						}
 					}
