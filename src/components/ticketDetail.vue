@@ -27,7 +27,7 @@
 						</div>
 						<div class="chatImg">
 							<div class="chatimgContain">
-								<img src="https://img.yzcdn.cn/vant/cat.jpeg" alt="">
+								<img src="https://img.yzcdn.cn/vant/cat.jpeg" alt="" @click="sceneImg(imgs,0)">
 							</div>
 							<div class="chatimgContain">
 								<img src="https://img.yzcdn.cn/vant/leaf.jpg" alt="">
@@ -66,7 +66,7 @@
 					<div class="uploadImgContain">
 						<!-- 图片列表 -->
 						<div class="imgWaiting" v-for="(item,index) in form.image" :key="index">
-							<img :src="item" alt="" class="uploadImgItem">
+							<img :src="item" alt="" class="uploadImgItem" @click="sceneImg(imgs,0)">
 							<img src="/static/img/form_pic_icon_close.png" alt="" class="delectUpload" @click="delectFormImg(index)">
 						</div>
 						<!-- 上传按钮 -->
@@ -148,7 +148,7 @@
 	</div>
 </template>
 <script>
-	import { Button,Uploader,Toast, Overlay, Rate, Field , Loading} from 'vant';
+	import { Button,Uploader,Toast, Overlay, Rate, Field , Loading, ImagePreview } from 'vant';
 	import url from 'url'
 	import Top from '../assets/top'
 	import lrz from 'lrz';
@@ -159,7 +159,7 @@
 				ticketId:'', // 票单id
 				form:{
 					content:'', // 回复内容
-					image:['https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg'], // 添加的图片
+					image:['https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg'], // 添加的图片
 				},
 				uploadImgFlag:false, // 上传loading
 				fileList:[
@@ -177,6 +177,15 @@
 			// this.getRecodeList()
 		},
 		methods:{
+			// 预览图片
+			sceneImg(images,index) {
+				ImagePreview({
+					images:this.form.image, //需要预览的图片 URL 数组
+					showIndex:true, //是否显示页码
+					loop:false, //是否开启循环播放
+					startPosition:index //图片预览起始位置索引
+				})
+			},
 			// 删除上传图片
 			delectFormImg(index){
 				this.form.image.splice(index, 1)
@@ -288,7 +297,8 @@
 			[Overlay.name]:Overlay,
 			[Rate.name]:Rate,
 			[Field.name]:Field,
-			[Loading.name]:Loading
+			[Loading.name]:Loading,
+			[ImagePreview.name]:ImagePreview
 		}
 	}
 </script>
