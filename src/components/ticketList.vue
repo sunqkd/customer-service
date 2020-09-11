@@ -11,7 +11,7 @@
 						<span>Feedback Time</span>
 					</div>
 					<!-- 有新回复 -->
-					<div class="ticketReplied" v-for="(item,index) in repliedTicketList" :key="index + 'a'"  @click="goTicketDetail(item.id)">
+					<div class="ticketReplied" v-for="(item,index) in repliedTicketList" :key="index + 'a'"  @click="goTicketDetail(item.id,item.email,item.type)">
 						<span>
 							Ticket {{item.ticketNo}}
 						</span>
@@ -23,7 +23,7 @@
 						</span>
 					</div>
 					<!-- 待回复 -->
-					<div class="ticketwait" v-for="(item,index) in waitReplyTicketList" :key="index + 'b'"  @click="goTicketDetail(item.id)">
+					<div class="ticketwait" v-for="(item,index) in waitReplyTicketList" :key="index + 'b'"  @click="goTicketDetail(item.id,item.email,item.type)">
 						<span>
 							Ticket {{item.ticketNo}}
 						</span>
@@ -111,8 +111,8 @@
 				})
 			},
 			// 获取沟通
-			goTicketDetail(id){
-				this.$router.push(`/ticketDetail?ticketId=${id}`)
+			goTicketDetail(id,email,type){
+				this.$router.push(`/ticketDetail?ticketId=${id}&email=${email}&type=${type}`)
 			},
 			// 历史反馈
 			gohistory(){

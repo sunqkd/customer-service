@@ -4,8 +4,8 @@
 		<div class="ticketdetailContain">
 			<!-- 问题类型 -->
 			<div class="detailTitle">
-				<span>Question Type:  Others</span>
-				<span>Email: 123456@ingcreations.com</span>
+				<span>Question Type:  {{typeArr[type].label}}</span>
+				<span>Email: {{this.email}}</span>
 			</div>
 			<!-- 聊天记录 -->
 			<div class="chatOutContain">
@@ -112,6 +112,29 @@
 		data() {
 			return {
 				ticketId:'', // 票单id
+				email:'', // 邮箱
+				type: 0, // 问题类型
+				typeArr:[
+					{
+						label:'Choose a type',
+						value:0
+					},{
+						label:'Account',
+						value:1
+					},{
+						label:'Recharge',
+						value:2
+					},{
+						label:'Network',
+						value:3
+					},{
+						label:'Bug',
+						value:4
+					},{
+						label:'Others',
+						value:5
+					}
+				],
 				form:{
 					content:'', // 回复内容
 					image:[], // 添加的图片
@@ -126,6 +149,8 @@
 		created(){
 			var urllist = window.location.href
 			this.ticketId = url.parse(urllist,true).query.ticketId
+			this.email = url.parse(urllist,true).query.email
+			this.type = url.parse(urllist,true).query.type
 			this.getRecodeList()
 		},
 		methods:{

@@ -11,7 +11,7 @@
 				</div>
                 <!-- 历史票单 -->
                 <!-- 已解决 -->
-                <div class="historyList" v-for="(item,index) in resolvedTicketList" :key="index + 'c'" @click="goTicketDetail(item.id)">
+                <div class="historyList" v-for="(item,index) in resolvedTicketList" :key="index + 'c'" @click="goTicketDetail(item.id,item.email,item.type)">
 					<span>
 						Ticket {{item.ticketNo}}
 					</span>
@@ -20,7 +20,7 @@
 					</span>
 				</div>
                 <!-- 已归档 -->
-                <div class="historyList" v-for="(item,index) in archivedTicketList" :key="index + 'd'" @click="goTicketDetail(item.id)">
+                <div class="historyList" v-for="(item,index) in archivedTicketList" :key="index + 'd'" @click="goTicketDetail(item.id,item.email,item.type)">
 					<span>
 						Ticket {{item.ticketNo}}
 					</span>
@@ -103,8 +103,8 @@
                 })
             },
             // 获取沟通
-			goTicketDetail(id){
-				this.$router.push(`/ticketDetail?ticketId=${id}`)
+			goTicketDetail(id,email,type){
+				this.$router.push(`/ticketDetail?ticketId=${id}&email=${email}&type=${type}`)
 			},
             
         },
