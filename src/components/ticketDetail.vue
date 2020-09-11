@@ -13,7 +13,7 @@
 					<!-- 时间及人物 -->
 					<div class="timeandHeros">
 						<span class="hero">
-							{{item.type == 1?'Service':'Me'}}
+							{{item.type == 1?`REPLY FROM ${item.operatorName}`:'Me'}}
 						</span>
 						<span class="serverTime">
 							UTC {{ item.createAt?$moment(item.createAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
@@ -321,19 +321,19 @@
 						.timeandHeros{
 							width: 100%;
 							height: 0.4rem;
-							padding:0 0.26rem;
+							padding:0 0.24rem;
 							box-sizing: border-box;
 							background-color: #b3c2dc;
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
 							.hero{
-								font-size: 0.16rem;
+								font-size: 0.14rem;
 								font-weight: bold;
 								color: #333333;
 							}
 							.serverTime{
-								font-size: 0.15rem;
+								font-size: 0.14rem;
 								color: #333333;
 							}
 						}
