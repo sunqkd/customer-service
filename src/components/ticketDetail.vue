@@ -1,6 +1,6 @@
 <template>
 	<div class="tickDetail">
-		<Top :backflag="true" :homeflag="true"></Top>
+		<Top :backflag="true" :homeflag="true" :routego="'xxxx'"></Top>
 		<div class="ticketdetailContain">
 			<!-- 问题类型 -->
 			<div class="detailTitle">

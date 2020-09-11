@@ -1,6 +1,6 @@
 <template>
 	<div class="faqdetail">
-		<Top :backflag="true" :homeflag="true"></Top>
+		<Top :backflag="true" :homeflag="true" :routego="'/faq'"></Top>
 		<!-- top -->
 		<div class="detailContent">
 			<div class="detailTitle">

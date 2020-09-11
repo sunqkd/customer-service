@@ -13,6 +13,10 @@
             }
         },
         props:{
+            routego:{
+                type:String,
+                default:'/'
+            },
             backflag:{
                 type:Boolean,
                 default:false
@@ -25,7 +29,11 @@
         methods:{
             // 回退一步
             goBack(){
-                this.$router.go(-1)
+                if(this.routego == 'xxxx'){
+                    this.$router.go(-1)
+                }else{
+                    this.$router.push(this.routego)
+                }
             },
             // 主页
             homePage(){

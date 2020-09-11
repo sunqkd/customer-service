@@ -1,6 +1,6 @@
 <template>
     <div class="historyTicket">
-        <Top :backflag="true" :homeflag="true"></Top>
+        <Top :backflag="true" :homeflag="true" :routego="'/ticketList'"></Top>
         <div class="historyContain" v-if="!loadingFlag">
             <!-- 有历史记录 -->
             <div class="historyListout" v-if="resolvedTicketList.length > 0 || archivedTicketList.length >0">

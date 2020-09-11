@@ -1,6 +1,6 @@
 <template>
 	<div class="createTicket">
-		<Top :backflag="true" :homeflag="true"></Top>
+		<Top :backflag="true" :homeflag="true" :routego="'/ticketList'"></Top>
 		<div class="createContain">
 			<!-- title -->
 			<div class="createTitle">
@@ -23,6 +23,7 @@
 			<div class="questionContent">
 				<span>Question Content</span>
 				<van-field
+					required
 				    class="questionFiled"
 					v-model="form.content"
 					rows="4"
@@ -31,13 +32,14 @@
 					maxlength="400"
 					placeholder="I can’t find..."
 					show-word-limit
+					@keyup.native="testFiled()"
 				/>
 			</div>
 			<!-- 上传图片 -->
 			<div class="uploadImgContain">
 				<!-- 图片列表 -->
 				<div class="imgWaiting" v-for="(item,index) in form.image" :key="index">
-					<img :src="item" alt="" class="uploadImgItem" @click="sceneImg(imgs,index)">
+					<img :src="item" alt="" class="uploadImgItem" @click="sceneImg(form.image,index)">
 					<img src="/static/img/form_pic_icon_close.png" alt="" class="delectUpload" @click="delectFormImg(index)">
 				</div>
 				<!-- 上传按钮 -->
@@ -69,7 +71,7 @@
 					email:'', // 邮箱
 					type:0, // 问题类型  默认为请选择
 					content:'', // 问题内容
-					image:['https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/leaf.jpg'] // 问题图片
+					image:[] // 问题图片
 				},
 				uploadImgFlag:false, // 上传按钮和loading
 				// 问题类型数组
@@ -100,10 +102,14 @@
 			
 		},
 		methods:{
+			// 开头不能输入空格
+			testFiled(){
+				this.form.content = this.form.content.replace(/(^[\s|　]*)/g,"");
+			},
 			// 预览图片
 			sceneImg(images,index) {
 				ImagePreview({
-					images:this.form.image, //需要预览的图片 URL 数组
+					images:images, //需要预览的图片 URL 数组
 					showIndex:true, //是否显示页码
 					loop:false, //是否开启循环播放
 					startPosition:index //图片预览起始位置索引
@@ -112,8 +118,6 @@
 			// 上传图片回调函数
 			afterRead(fileImg){
 				this.uploadImgFlag = true; // 上传loading
-				fileImg.status = 'uploading';
-      			fileImg.message = '上传中...';
 				var fd = new FormData();
 				// 压缩图片在上传
 				lrz(fileImg.file,{ quality: 0.6 }).then((rst)=>{
@@ -125,8 +129,7 @@
 					}
 					this.$axios.post('/api/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
 						if(res.data.code == 0){
-							Toast.success('上传成功');
-							console.log(res);
+							Toast.success('Upload successful ');
 							this.form.image.push(res.data.data);
 						}else{
 							Toast.fail(res.data.message);
@@ -140,8 +143,25 @@
 			},
 
 			send(){ // 发送
-				console.log(this.form)
-				this.createTicket()
+				// console.log(this.form)
+				// 校验邮箱
+				// 问题类型必填
+				// 信息内容必填
+				var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+				if(re.test(this.form.email)){ // 邮箱正确
+					if(this.form.type == 0){ // 问题类型必选
+						Toast.fail('Please choice question type')
+					}else{
+						if(this.form.content.length == 0){
+							Toast.fail('Please fill in the question content')
+						}else{
+							this.createTicket()
+						}
+					}
+				}else{ // 邮箱错误
+					console.log('邮箱错误')
+					Toast.fail('Please check the email format!')
+				}
 			},
 
 			// 创建工单
@@ -161,7 +181,8 @@
 				}
 				this.$axios.post('/api/ticket/create',data).then((res)=>{
 					if(res.data.code == 0){
-						Toast.success('创建成功');
+						Toast.success('Creating a successful');
+						this.$router.push('/ticketList')
 					}else{
 						Toast.fail(res.data.message);
 					}
