@@ -129,7 +129,7 @@
 					}
 					this.$axios.post('/api/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
 						if(res.data.code == 0){
-							Toast.success('Upload successful ');
+							Toast.success('Upload successful');
 							this.form.image.push(res.data.data);
 						}else{
 							Toast.fail(res.data.message);

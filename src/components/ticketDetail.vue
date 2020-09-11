@@ -9,37 +9,24 @@
 			</div>
 			<!-- 聊天记录 -->
 			<div class="chatOutContain">
-				<div class="chatList" v-for="i in 5">
+				<div class="chatList" v-for="(item,index) in recodeList" :key="index">
 					<!-- 时间及人物 -->
 					<div class="timeandHeros">
 						<span class="hero">
-							Me
+							{{item.type == 1?'Service':'Me'}}
 						</span>
 						<span class="serverTime">
-							UTC 2020/08/01 12:34:56
+							UTC {{ item.createAt?$moment(item.createAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
 						</span>
 					</div>
 					<!-- 详细内容 -->
 					<div class="chatContent">
-						<div class="chatText">
-							1. Facebook registration: open Whoot!, go to the “Login” page and tap “Facebook Login”. Whoot! will then use your Facebook account information to create your account.<br/>
-							2. Apple registration: open Whoot! Stamp, go to the “Login” page and tap “Apple Login”. Whoot! Stamp will then use your Apple account information to create your account.
+						<div class="chatText" v-html="item.content"  style="white-space:pre-line">
+							
 						</div>
-						<div class="chatImg">
-							<div class="chatimgContain">
-								<img src="https://img.yzcdn.cn/vant/cat.jpeg" alt="" @click="sceneImg(imgs,0)">
-							</div>
-							<div class="chatimgContain">
-								<img src="https://img.yzcdn.cn/vant/leaf.jpg" alt="">
-							</div>
-							<div class="chatimgContain">
-								<img src="https://img.yzcdn.cn/vant/tree.jpg" alt="">
-							</div>
-							<div class="chatimgContain">
-								<img src="https://img.yzcdn.cn/vant/cat.jpeg" alt="">
-							</div>
-							<div class="chatimgContain">
-								<img src="https://img.yzcdn.cn/vant/leaf.jpg" alt="">
+						<div class="chatImg" v-if="item.image.length > 0">
+							<div class="chatimgContain" v-for="(lit,litindex) in item.image.split(',')" :key="litindex">
+								<img :src="lit" alt="" @click="sceneImg(item.image.split(','),litindex)">
 							</div>
 						</div>
 					</div>
@@ -53,6 +40,7 @@
 				<div class="filedContent">
 					<div class="vantFiledOut">
 						<van-field
+							required
 							class="filedText"
 							v-model="form.content"
 							rows="4"
@@ -61,12 +49,13 @@
 							maxlength="400"
 							placeholder="I can’t find..."
 							show-word-limit
+							@keyup.native="testFiled()"
 						/>
 					</div>
 					<div class="uploadImgContain">
 						<!-- 图片列表 -->
 						<div class="imgWaiting" v-for="(item,index) in form.image" :key="index">
-							<img :src="item" alt="" class="uploadImgItem" @click="sceneImg(imgs,0)">
+							<img :src="item" alt="" class="uploadImgItem" @click="sceneImg(form.image,index)">
 							<img src="/static/img/form_pic_icon_close.png" alt="" class="delectUpload" @click="delectFormImg(index)">
 						</div>
 						<!-- 上传按钮 -->
@@ -111,44 +100,10 @@
 				</div>
 			</div>
 		</van-overlay>
-
-
-
-		<div style="display:none">
-		<hr/>
-		<b>票单详情</b>
-		<pre>{{form}}</pre>
-		<ul>
-			<li v-for="(item,index) in recodeList" :key="index">
-				{{item.createAt}}<br/>
-				{{item.content}}
-				<br/>
-				<img  :src="item.image" style="width:50px;height:50px;"/>
-				<hr/>
-			</li>
-		</ul>
-		<!-- 显示发送框-->
-		<div v-if="listFlag">
-			<span>回复消息</span>
-			<input type="text" v-model="form.content">
-			<!-- 上传图片 -->
-			<div>
-				<van-uploader :after-read="afterRead" v-model="fileList" multiple/>
-			</div>
-			<div>
-				<van-button type="info" @click="cancelReply()">取消回复</van-button>
-				<van-button type="info" @click="sendreply()">发送</van-button>
-			</div>
-		</div>
-		<!-- 隐藏发送框 -->
-		<div v-if="!listFlag">
-			<van-button type="danger" @click="updateResolve()">问题已解决</van-button>
-			<van-button type="danger" @click="reply()">回复信息</van-button>
-		</div></div>
 	</div>
 </template>
 <script>
-	import { Button,Uploader,Toast, Overlay, Rate, Field , Loading, ImagePreview } from 'vant';
+	import { Uploader,Toast, Overlay, Rate, Field , Loading, ImagePreview } from 'vant';
 	import url from 'url'
 	import Top from '../assets/top'
 	import lrz from 'lrz';
@@ -159,12 +114,9 @@
 				ticketId:'', // 票单id
 				form:{
 					content:'', // 回复内容
-					image:['https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg','https://img.yzcdn.cn/vant/leaf.jpg'], // 添加的图片
+					image:[], // 添加的图片
 				},
 				uploadImgFlag:false, // 上传loading
-				fileList:[
-					{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }
-				],
 				listFlag:false, // 是否显示发送输入框
 				recodeList:[], // 工单记录
 				startFlag: false, // 评分弹出层
@@ -172,15 +124,19 @@
 			}
 		},
 		created(){
-			// var urllist = window.location.href
-			// this.ticketId = url.parse(urllist,true).query.ticketId
-			// this.getRecodeList()
+			var urllist = window.location.href
+			this.ticketId = url.parse(urllist,true).query.ticketId
+			this.getRecodeList()
 		},
 		methods:{
+			// 开头不能输入空格
+			testFiled(){
+				this.form.content = this.form.content.replace(/(^[\s|　]*)/g,"");
+			},
 			// 预览图片
 			sceneImg(images,index) {
 				ImagePreview({
-					images:this.form.image, //需要预览的图片 URL 数组
+					images:images, //需要预览的图片 URL 数组
 					showIndex:true, //是否显示页码
 					loop:false, //是否开启循环播放
 					startPosition:index //图片预览起始位置索引
@@ -193,8 +149,6 @@
 			// 上传图片回调函数
 			afterRead(fileImg){
 				this.uploadImgFlag = true; // 上传loading
-				fileImg.status = 'uploading';
-      			fileImg.message = '上传中...';
 				var fd = new FormData();
 				// 压缩图片在上传
 				lrz(fileImg.file,{ quality: 0.6 }).then((rst)=>{
@@ -206,8 +160,7 @@
 					}
 					this.$axios.post('/api/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
 						if(res.data.code == 0){
-							Toast.success('上传成功');
-							console.log(res);
+							Toast.success('Upload successful');
 							this.form.image.push(res.data.data);
 						}else{
 							Toast.fail(res.data.message);
@@ -229,7 +182,7 @@
 			// 提交评分  问题已解决
 			submitScore(){
 				this.startFlag = false;
-				// this.updateResolve();
+				this.updateResolve();
 			},
 			// 查询工单沟通记录
 			getRecodeList(){
@@ -240,8 +193,10 @@
 					if(res.data.code == 0){
 						this.recodeList = res.data.data
 					}else{
-
+						this.recodeList = []
 					}
+				}).catch((res)=>{
+					console.log(res)
 				})
 			},
 			// 回复信息
@@ -261,21 +216,29 @@
 			cancelReply(){
 				this.listFlag = false
 			},
-			// 回复信息发送
+			// 创建回复信息发送
 			sendreply(){
-				var data = {
-					content:this.form.content,
-					image:'https://img.yzcdn.cn/vant/leaf.jpg',
-					ticketId:this.ticketId,
-					type:1
+				// 校验输入框 是否填写
+				if(this.form.content.length == 0){
+					Toast.fail('Please fill in the question content')
+				}else{
+					var data = {
+						content:this.form.content,
+						image:this.form.image.join(','),
+						ticketId:this.ticketId,
+						type:2
+					}
+					this.$axios.post('/api/ticket/record/create',data).then((res)=>{
+						if(res.data.code == 0){
+							Toast.success('success');
+							this.getRecodeList()
+						}else{
+							Toast.fail(res.data.message);
+						}
+					}).catch((error)=>{
+						console.log(error)
+					})					
 				}
-				this.$axios.post('/api/ticket/record/create',data).then((res)=>{
-					console.log(res)
-					Toast.success('success');
-					this.getRecodeList()
-				}).catch((error)=>{
-					
-				})
 			},
 			// 问题已解决
 			updateResolve(){
@@ -284,14 +247,17 @@
 					ticketId:this.ticketId
 				}
 				this.$axios.post('/api/ticket/update',data).then((res)=>{
-					console.log(res)
-					Toast.success('success');
+					if(res.data.code == 0){
+						Toast.success('Thank you for your feedback');
+						this.$router.push('/ticketList')
+					}else{
+						Toast.fail(res.data.message);
+					}
 				})
 			}
 		},
 		components:{
 			Top,
-			[Button.name]:Button,
 			[Toast.name]:Toast,
 			[Uploader.name]:Uploader,
 			[Overlay.name]:Overlay,
