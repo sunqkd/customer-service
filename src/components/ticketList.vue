@@ -2,72 +2,72 @@
 	<div class="ticketList">
 		<Top :backflag="true" :homeflag="true"></Top>
 		<div class="ticketContain">
-			<!-- 有数据 -->
-			<div class="ticketList">
-				<!-- 标题 -->
-				<div class="ticketTitle">
-					<span>Current Feedback</span>
-					<span>Feedback Time</span>
+			<div v-if="!loadingFlag">
+				<!-- 有数据 -->
+				<div class="ticketList" v-if="repliedTicketList.length > 0 || waitReplyTicketList.length > 0">
+					<!-- 标题 -->
+					<div class="ticketTitle">
+						<span>Current Feedback</span>
+						<span>Feedback Time</span>
+					</div>
+					<!-- 有新回复 -->
+					<div class="ticketReplied" v-for="(item,index) in repliedTicketList" :key="index + 'a'"  @click="goTicketDetail(item.id)">
+						<span>
+							Ticket {{item.ticketNo}}
+						</span>
+						<span>
+							{{ item.updateAt?$moment(item.updateAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
+						</span>
+						<span class="newReply">
+							New Reply
+						</span>
+					</div>
+					<!-- 待回复 -->
+					<div class="ticketwait" v-for="(item,index) in waitReplyTicketList" :key="index + 'b'"  @click="goTicketDetail(item.id)">
+						<span>
+							Ticket {{item.ticketNo}}
+						</span>
+						<span>
+							{{ item.updateAt?$moment(item.updateAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
+						</span>
+					</div>
 				</div>
-				<!-- 有新回复 -->
-				<div class="ticketReplied" @click="goTicketDetail(item.id)">
-					<span>
-						Ticket 222233333
-					</span>
-					<span>
-						2020/08/01 12:34:56
-					</span>
-					<span class="newReply">
-						New Reply
-					</span>
-				</div>
-				<!-- 待回复 -->
-				<div class="ticketwait" @click="goTicketDetail(item.id)">
-					<span>
-						Ticket 222233333
-					</span>
-					<span>
-						2020/08/01 12:34:56
-					</span>
+				<!-- 无数据 -->
+				<div class="noTickets" v-if="repliedTicketList.length == 0 && waitReplyTicketList.length == 0">
+					<img src="/static/img/blank_icon_feedback.png" alt="">
+					<span>You can contact us for more help </span>
 				</div>
 			</div>
-			<!-- 无数据 -->
-			<div class="noTickets" style="display:none">
-				<img src="/static/img/blank_icon_feedback.png" alt="">
-				<span>You can contact us for more help </span>
-			</div>
+			<Loading v-if="loadingFlag"></Loading>
 			<!-- 联系我们 -->
 			<div class="ticketFooter">
 				<span @click="gohistory()">History Feedback</span>
 				<span class="contactUs" @click="linkCustomer()">Contact us</span>
 			</div>
 		</div>
-		<!-- 
-			<b>票单列表</b>
-			<ul>
-				<li v-for="(item,index) in repliedTicketList" :key="index + 'a'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-				<li v-for="(item,index) in waitReplyTicketList" :key="index + 'b'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-			</ul>
-		-->
 	</div>
 </template>
 <script>
 	import Top from '../assets/top'
+	import Loading from '../assets/loading'
 	export default {
 		name: 'ticketList',
 		data() {
 			return {
+				loadingFlag:false, // loading
 				repliedTicketList:[], // 已回复工单
 				waitReplyTicketList:[], // 待回复
 			}
 		},
-		created(){
-			// this.getRepliedTicketList()
-			// this.getwaitReplyTicketList()
+		async created(){
+			this.loadingFlag = true
+			await this.getRepliedTicketList()
+			await this.getwaitReplyTicketList()
+			this.loadingFlag = false
 		},
 		methods:{
 			// 查询已回复的工单
-			getRepliedTicketList(){
+			async getRepliedTicketList(){
 				var data = {
 					"accountId": "100", // 玩家ID
 					// "createAt": "", // 工单创建时间
@@ -78,14 +78,18 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/api/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.repliedTicketList = res.data.data
+					}else{
+						this.repliedTicketList = []
 					}
+				}).catch((res)=>{
+					console.log(res)
 				})
 			},
 			// 查询待回复的工单
-			getwaitReplyTicketList(){
+			async getwaitReplyTicketList(){
 				var data = {
 					"accountId": "100", // 玩家ID
 					// "createAt": "", // 工单创建时间
@@ -96,10 +100,14 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/api/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.waitReplyTicketList = res.data.data
+					}else{
+						this.waitReplyTicketList = []
 					}
+				}).catch((res)=>{
+					console.log(res)
 				})
 			},
 			// 获取沟通
@@ -117,7 +125,8 @@
 
 		},
 		components:{
-			Top
+			Top,
+			Loading
 		}
 	}
 </script>
@@ -166,6 +175,8 @@
 					font-size: 0.15rem;
 					color: #b3c2dc;
 					font-weight: bold;
+					padding-top:0.27rem;
+					box-sizing: border-box;
 					img{
 						margin-bottom:0.14rem;
 						display: block;
@@ -185,9 +196,14 @@
 						span{
 							display: inline-block;
 							color: #333333;
-							font-size: 0.16rem;
+							font-size: 0.14rem;
 							font-weight:bold;
-							width:33.33%;
+							&:nth-child(1){
+								width:50%
+							}
+							&:nth-child(2){
+								width:30%
+							}
 						}
 					}
 					.ticketReplied{
@@ -197,10 +213,18 @@
 						align-items: center;
 						color: #405a89;
 						span{
-							font-size: 0.16rem;
+							font-size: 0.14rem;
 							display: inline-block;
-							width:33.33%;
 							font-weight: bold;
+							&:nth-child(1){
+								width:50%
+							}
+							&:nth-child(2){
+								width:30%
+							}
+							&:nth-child(3){
+								width:20%
+							}
 						}
 						.newReply{
 							color: #b3c2dc;
@@ -214,9 +238,14 @@
 						align-items: center;
 						color: #333333;
 						span{
-							font-size: 0.16rem;
+							font-size: 0.14rem;
 							display: inline-block;
-							width:33.33%;
+							&:nth-child(1){
+								width:50%
+							}
+							&:nth-child(2){
+								width:30%
+							}
 						}
 					}
 				}
@@ -263,6 +292,8 @@
 					font-size: 0.0857rem;
 					color: #b3c2dc;
 					font-weight: bold;
+					padding-top:0.154rem;
+					box-sizing: border-box;
 					img{
 						margin-bottom:0.08rem;
 						display: block;
@@ -281,10 +312,15 @@
 						box-sizing: border-box;
 						span{
 							display: inline-block;
-							width:33.3%;
 							color: #333333;
 							font-size: 0.091rem;
 							font-weight:bold;
+							&:nth-child(1){
+								width:45%
+							}
+							&:nth-child(2){
+								width:35%
+							}
 						}
 					}
 					.ticketReplied{
@@ -296,8 +332,16 @@
 						span{
 							font-size: 0.091rem;
 							display: inline-block;
-							width:33.3%;
 							font-weight: bold;
+							&:nth-child(1){
+								width:45%
+							}
+							&:nth-child(2){
+								width:35%
+							}
+							&:nth-child(3){
+								width:20%
+							}
 						}
 						.newReply{
 							color: #b3c2dc;
@@ -313,7 +357,12 @@
 						span{
 							font-size: 0.091rem;
 							display: inline-block;
-							width:33.3%;
+							&:nth-child(1){
+								width:45%
+							}
+							&:nth-child(2){
+								width:35%
+							}
 						}
 					}
 				}
