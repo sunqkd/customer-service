@@ -34,6 +34,7 @@
                 <img src="/static/img/blank_icon_feedback.png" alt="">
             </div>
         </div>
+        <!-- loading -->
         <div v-if="loadingFlag">
             <Loading></Loading>
         </div>
