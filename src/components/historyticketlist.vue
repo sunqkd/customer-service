@@ -1,9 +1,9 @@
 <template>
     <div class="historyTicket">
         <Top :backflag="true" :homeflag="true"></Top>
-        <div class="historyContain">
+        <div class="historyContain" v-if="!loadingFlag">
             <!-- 有历史记录 -->
-            <div class="historyList" >
+            <div class="historyListout" v-if="resolvedTicketList.length > 0 || archivedTicketList.length >0">
                 <!-- 标题 -->
 				<div class="historyTitle">
 					<span>History Feedback</span>
@@ -11,54 +11,54 @@
 				</div>
                 <!-- 历史票单 -->
                 <!-- 已解决 -->
-                <div class="historyList" @click="goTicketDetail(item.id)">
+                <div class="historyList" v-for="(item,index) in resolvedTicketList" :key="index + 'c'" @click="goTicketDetail(item.id)">
 					<span>
-						Ticket 222233333
+						Ticket {{item.ticketNo}}
 					</span>
 					<span>
-						2020/08/01 12:34:56
+						{{ item.updateAt?$moment(item.updateAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
 					</span>
 				</div>
                 <!-- 已归档 -->
-                <div class="historyList" @click="goTicketDetail(item.id)">
+                <div class="historyList" v-for="(item,index) in archivedTicketList" :key="index + 'd'" @click="goTicketDetail(item.id)">
 					<span>
-						Ticket 222233333
+						Ticket {{item.ticketNo}}
 					</span>
 					<span>
-						2020/08/01 12:34:56
+						{{ item.updateAt?$moment(item.updateAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
 					</span>
 				</div>
             </div>
             <!-- 无历史 -->
-            <div class="noHistory" style="display:none">
+            <div class="noHistory" v-if="resolvedTicketList.length == 0 && archivedTicketList.length == 0">
                 <img src="/static/img/blank_icon_feedback.png" alt="">
             </div>
         </div>
-        <!-- 
-            <div>历史票单</div>
-            <ul>
-                <li v-for="(item,index) in resolvedTicketList" :key="index + 'c'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-                <li v-for="(item,index) in archivedTicketList" :key="index + 'd'" @click="goTicketDetail(item.id)">{{item.id}} <br/></li>
-            </ul> 
-        -->
+        <div v-if="loadingFlag">
+            <Loading></Loading>
+        </div>
     </div>
 </template>
 <script>
     import Top from '../assets/top'
+    import Loading from '../assets/loading'
     export default {
         data(){
             return{
+                loadingFlag:false, // loading
                 resolvedTicketList:[], // 已解决票单
                 archivedTicketList:[], // 已归档
             }
         },
-        created(){
-            // this.getResolvedTicketList()
-            // this.getArchivedTicketList()
+        async created(){
+            this.loadingFlag = true
+            await this.getResolvedTicketList()
+            await this.getArchivedTicketList()
+            this.loadingFlag = false
         },
         methods:{
             // 已解决
-            getResolvedTicketList(){
+            async getResolvedTicketList(){
 				var data = {
 					"accountId": "100", // 玩家ID
 					// "createAt": "", // 工单创建时间
@@ -69,14 +69,18 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/api/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.resolvedTicketList = res.data.data
-					}
-				})
+					}else{
+                        this.resolvedTicketList = []
+                    }
+				}).catch((res)=>{
+                    console.log(res)
+                })
             },
             // 已归档
-            getArchivedTicketList(){
+            async getArchivedTicketList(){
 				var data = {
 					"accountId": "100", // 玩家ID
 					// "createAt": "", // 工单创建时间
@@ -87,11 +91,15 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/api/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.archivedTicketList = res.data.data
-					}
-				})
+					}else{
+                        this.archivedTicketList = []
+                    }
+				}).catch((res)=>{
+                    console.log(res)
+                })
             },
             // 获取沟通
 			goTicketDetail(id){
@@ -100,7 +108,8 @@
             
         },
         components:{
-            Top
+            Top,
+            Loading
         }
     }
 </script>
@@ -127,7 +136,7 @@
                         height:auto;
                     }
                 }
-                .historyList{
+                .historyListout{
                     width: 100%;
                     .historyTitle{
                         width:100%;
@@ -140,7 +149,7 @@
                             display: inline-block;
                             width:50%;
                             color: #333333;
-                            font-size: 0.16rem;
+                            font-size: 0.14rem;
                             font-weight:bold;
                         }
                     }
@@ -151,7 +160,7 @@
                         align-items: center;
                         color: #333333;
                         span{
-                            font-size: 0.16rem;
+                            font-size: 0.14rem;
                             display: inline-block;
                             width:50%;
                         }
@@ -178,7 +187,7 @@
                         height:auto;
                     }
                 }
-                .historyList{
+                .historyListout{
                     width: 100%;
                     .historyTitle{
                         width:100%;
