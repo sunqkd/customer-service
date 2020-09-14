@@ -69,7 +69,7 @@
 			// 查询已回复的工单
 			async getRepliedTicketList(){
 				var data = {
-					"accountId": "100", // 玩家ID
+					"accountId": sessionStorage.getItem('playerId'), // 玩家ID
 					// "createAt": "", // 工单创建时间
 					// "name": "100name", // 玩家名字
 					"page": 1, // 页码

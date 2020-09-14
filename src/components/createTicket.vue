@@ -168,16 +168,16 @@
 			createTicket(){
 			    let data = {
 					"content": this.form.content, // 问题内容  ***
-					"device": "", // 设备信息
+					"device": sessionStorage.getItem('device'), // 设备信息
 					"email": this.form.email, // 邮件  ***
 					"image": this.form.image.join(','), // 图片  ***
-					"nation": "", // 国家
-					"os": "", // 操作系统
-					"playerId": "100", // 玩家ID
-					"playerName": "100name", // 玩家名称
-					"remainGem": 0, // 剩余钻石
+					"nation": sessionStorage.getItem('nation'), // 国家
+					"os": sessionStorage.getItem('os'), // 操作系统
+					"playerId": sessionStorage.getItem('playerId'), // 玩家ID
+					"playerName": sessionStorage.getItem('playerName'), // 玩家名称
+					"remainGem": sessionStorage.getItem('remainGem'), // 剩余钻石
 					"type": this.form.type, // 工单类型  ***
-					"version": "" // 客户端版本
+					"version": sessionStorage.getItem('version') // 客户端版本
 				}
 				this.$axios.post('/api/ticket/create',data).then((res)=>{
 					if(res.data.code == 0){

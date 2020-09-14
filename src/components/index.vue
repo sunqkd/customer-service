@@ -89,7 +89,20 @@
 		},
 		created(){
 			var urllist = window.location.href
-			console.log(url.parse(urllist,true))
+			var query = url.parse(urllist,true).query
+			if(JSON.stringify(query) == "{}"){
+				console.log('空')
+				console.log(query)
+			}else{
+				sessionStorage.setItem('device',query.device) // 设备信息
+				sessionStorage.setItem('nation',query.nation) // 国家
+				sessionStorage.setItem('os',query.os) // 操作系统
+				sessionStorage.setItem('playerId',query.playerId) // 玩家ID
+				sessionStorage.setItem('playerName',query.playerName) // 玩家名称
+				sessionStorage.setItem('remainGem',query.remainGem) // 玩家ID
+				sessionStorage.setItem('version',query.version) // 客户端版本
+				console.log(query)
+			}
 			/*
 				如果有参数拼接 则存储为session中
 				如果没有参数拼接 session不做处理
