@@ -334,7 +334,7 @@
 							display: block;
 							width: 100%;
 							border-radius: 0.08rem;
-							height:auto;
+							height:100%;
 						}
 						.delectUpload{
 							display: block;
@@ -515,7 +515,7 @@
 							display: block;
 							width: 100%;
 							border-radius: 0.0457rem;
-							height:auto;
+							height:100%;
 						}
 						.delectUpload{
 							display: block;

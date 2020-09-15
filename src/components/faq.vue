@@ -83,7 +83,7 @@
 					.inputSearch{
 						flex: 1;
 						height:0.45rem;
-						padding:0 0.225rem;
+						padding:0 0.12rem;
 						box-sizing: border-box;
 						display: flex;
 						align-items: center;
@@ -112,7 +112,7 @@
 								height: 100%;
 								border: none;
 								font-size: 0.16rem;
-								color: #c3c3c3;
+								color: #333333;
 								font-family: PTsans;
 								&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 									color: #c3c3c3;
@@ -225,7 +225,7 @@
 					.inputSearch{
 						flex: 1;
 						height:0.257rem;
-						padding:0 0.128rem;
+						padding:0 0.068rem;
 						box-sizing: border-box;
 						display: flex;
 						align-items: center;
@@ -254,7 +254,7 @@
 								height: 100%;
 								border: none;
 								font-size: 0.091rem;
-								color: #c3c3c3;
+								color: #333333;
 								font-family: PTsans;
 								&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 									color: #c3c3c3;

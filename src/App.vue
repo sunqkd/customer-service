@@ -17,7 +17,7 @@
     }
 	@font-face {
 		font-family: PTsans;
-		src: url('/static/font/PTsans.ttf');
+		src: url('/static/font/PTsans.TTF');
 	}
     html, body {
         width: 100%;

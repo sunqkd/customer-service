@@ -77,7 +77,7 @@
 				</div>
 				<!-- 评分打星星 -->
 				<div class="replayStar" v-if="!listFlag">
-					<span class="problemBtn" @click="showScore()">problem solved</span>
+					<span class="problemBtn" @click="showScore()">Problem solved</span>
 					<span class="replyBtn"  @click="reply()">Reply message</span>
 				</div>
 			</div>
@@ -482,7 +482,7 @@
 									display: block;
 									width: 100%;
 									border-radius: 0.08rem;
-									height:auto;
+									height:100%;
 								}
 								.delectUpload{
 									display: block;
@@ -758,7 +758,7 @@
 									display: block;
 									width: 100%;
 									border-radius: 0.0457rem;
-									height:auto;
+									height:100%;
 								}
 								.delectUpload{
 									display: block;
