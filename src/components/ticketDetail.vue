@@ -8,7 +8,7 @@
 				<span>Email: {{this.email}}</span>
 			</div>
 			<!-- 聊天记录 -->
-			<div class="chatOutContain">
+			<div class="chatOutContain" id="msgChat">
 				<div class="chatList" v-for="(item,index) in recodeList" :key="index">
 					<!-- 时间及人物 -->
 					<div class="timeandHeros">
@@ -217,6 +217,11 @@
 				this.$axios.post('/api/ticket/record/all',data).then((res)=>{
 					if(res.data.code == 0){
 						this.recodeList = res.data.data
+						setTimeout(()=>{
+							var scrollTarget = document.getElementById("msgChat");
+							//scrollTarget.scrollHeight是获取dom元素的高度，然后设置scrollTop
+							scrollTarget.scrollTop=scrollTarget.scrollHeight;
+						},10)
 					}else{
 						this.recodeList = []
 					}
