@@ -181,6 +181,7 @@
 				}
 				this.$axios.post('/api/ticket/create',data).then((res)=>{
 					if(res.data.code == 0){
+						this.sendreply(res.data.data.id)
 						Toast.success('Creating a successful');
 						this.$router.push('/ticketList')
 					}else{
@@ -189,6 +190,24 @@
 				}).catch((error)=>{
 					console.log(error)
 				})
+			},
+			// 创建工单的同时添加一条沟通记录玩家 发起
+			sendreply(ticketId){
+				var data = {
+					content:this.form.content,
+					image:this.form.image.join(','),
+					ticketId:ticketId,
+					type:2
+				}
+				this.$axios.post('/api/ticket/record/create',data).then((res)=>{
+					if(res.data.code == 0){
+						console.log("玩家创建首条沟通记录成功")
+					}else{
+						Toast.fail(res.data.message);
+					}
+				}).catch((error)=>{
+					console.log(error)
+				})					
 			},
 
 			delectFormImg(index){ // 删除图片
