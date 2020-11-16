@@ -16,7 +16,7 @@
 						Ticket {{item.ticketNo}}
 					</span>
 					<span>
-						{{ item.updateAt?$moment(item.updateAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
+						{{ item.updateAt?$moment(item.updateAt).utc().utcOffset(+0).format('YYYY-MM-DD HH:mm:ss'):'--' }}
 					</span>
 				</div>
                 <!-- 已归档 -->
@@ -25,7 +25,7 @@
 						Ticket {{item.ticketNo}}
 					</span>
 					<span>
-						{{ item.updateAt?$moment(item.updateAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
+						{{ item.updateAt?$moment(item.updateAt).utc().utcOffset(+0).format('YYYY-MM-DD HH:mm:ss'):'--' }}
 					</span>
 				</div>
             </div>

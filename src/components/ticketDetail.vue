@@ -4,7 +4,7 @@
 		<div class="ticketdetailContain">
 			<!-- 问题类型 -->
 			<div class="detailTitle">
-				<span>Question Type:  {{typeArr[type].label}}</span>
+				<span>Question Type:  {{this.typeArr[type].label}}</span>
 				<span>Email: {{this.email}}</span>
 			</div>
 			<!-- 聊天记录 -->
@@ -16,7 +16,7 @@
 							{{item.type == 1?`REPLY FROM ${item.operatorName}`:'Me'}}
 						</span>
 						<span class="serverTime">
-							UTC {{ item.createAt?$moment(item.createAt).format('YYYY-MM-DD HH:mm:ss'):'--' }}
+							UTC {{ item.createAt?$moment(item.createAt).utc().utcOffset(+0).format('YYYY-MM-DD HH:mm:ss'):'--' }}
 						</span>
 					</div>
 					<!-- 详细内容 -->
@@ -104,7 +104,7 @@
 </template>
 <script>
 	import { Uploader,Toast, Overlay, Rate, Field , Loading, ImagePreview } from 'vant';
-	import url from 'url'
+    const querystring = require('querystring');
 	import Top from '../assets/top'
 	import lrz from 'lrz';
 	export default {
@@ -147,10 +147,10 @@
 			}
 		},
 		created(){
-			var urllist = window.location.href
-			this.ticketId = url.parse(urllist,true).query.ticketId
-			this.email = url.parse(urllist,true).query.email
-			this.type = url.parse(urllist,true).query.type
+			var urllist = window.location.href.split("?")[1]
+			this.ticketId = querystring.parse(urllist).ticketId
+			this.email = querystring.parse(urllist).email
+			this.type = querystring.parse(urllist).type
 			this.getRecodeList()
 		},
 		methods:{

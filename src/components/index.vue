@@ -79,7 +79,7 @@
 </template>
 <script>
 	import Top from '../assets/top'
-	import url from 'url'
+	const querystring = require('querystring');
 	export default {
 		name: 'index',
 		data() {
@@ -88,8 +88,8 @@
 			}
 		},
 		created(){
-			var urllist = window.location.href
-			var query = url.parse(urllist,true).query
+			var urllist = window.location.href.split('?')[1]
+			var query = querystring.parse(urllist)
 			if(JSON.stringify(query) == "{}"){
 				console.log('空')
 				console.log(query)
