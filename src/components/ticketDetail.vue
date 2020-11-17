@@ -183,7 +183,7 @@
 							'Content-Type': 'multipart/form-data;boundary'
 						}
 					}
-					this.$axios.post('/api/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
+					this.$axios.post('/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
 						if(res.data.code == 0){
 							Toast.success('Upload successful');
 							this.form.image.push(res.data.data);
@@ -214,7 +214,7 @@
 				let data = {
 					ticketId:this.ticketId
 				}
-				this.$axios.post('/api/ticket/record/all',data).then((res)=>{
+				this.$axios.post('/ticket/record/all',data).then((res)=>{
 					if(res.data.code == 0){
 						this.recodeList = res.data.data
 						setTimeout(()=>{
@@ -258,7 +258,7 @@
 						ticketId:this.ticketId,
 						type:2
 					}
-					this.$axios.post('/api/ticket/record/create',data).then((res)=>{
+					this.$axios.post('/ticket/record/create',data).then((res)=>{
 						if(res.data.code == 0){
 							Toast.success('success');
 							this.getRecodeList()
@@ -276,7 +276,7 @@
 					status:3, // 3 表示已解决
 					ticketId:this.ticketId
 				}
-				this.$axios.post('/api/ticket/update',data).then((res)=>{
+				this.$axios.post('/ticket/update',data).then((res)=>{
 					if(res.data.code == 0){
 						Toast.success('Thank you for your feedback');
 						this.$router.push('/ticketList')

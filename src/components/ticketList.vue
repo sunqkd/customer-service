@@ -78,7 +78,7 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				await this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.repliedTicketList = res.data.data
 					}else{
@@ -100,7 +100,7 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				await this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.waitReplyTicketList = res.data.data
 					}else{

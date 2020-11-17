@@ -70,7 +70,7 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				await this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.resolvedTicketList = res.data.data
 					}else{
@@ -92,7 +92,7 @@
 					// "ticketNo": "", // 工单号
 					// "type": 0 // 工单类型
 				}
-				await this.$axios.post('/api/ticket/search',data).then((res)=>{
+				await this.$axios.post('/ticket/search',data).then((res)=>{
 					if(res.data.code == 0){
 						this.archivedTicketList = res.data.data
 					}else{

@@ -127,7 +127,7 @@
 							'Content-Type': 'multipart/form-data;boundary'
 						}
 					}
-					this.$axios.post('/api/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
+					this.$axios.post('/file/gcs?bucket=ticket_images',fd,config).then((res)=>{
 						if(res.data.code == 0){
 							Toast.success('Upload successful');
 							this.form.image.push(res.data.data);
@@ -179,7 +179,7 @@
 					"type": this.form.type, // 工单类型  ***
 					"version": sessionStorage.getItem('version') // 客户端版本
 				}
-				this.$axios.post('/api/ticket/create',data).then((res)=>{
+				this.$axios.post('/ticket/create',data).then((res)=>{
 					if(res.data.code == 0){
 						this.sendreply(res.data.data.id)
 						Toast.success('Creating a successful');
@@ -199,7 +199,7 @@
 					ticketId:ticketId,
 					type:2
 				}
-				this.$axios.post('/api/ticket/record/create',data).then((res)=>{
+				this.$axios.post('/ticket/record/create',data).then((res)=>{
 					if(res.data.code == 0){
 						console.log("玩家创建首条沟通记录成功")
 					}else{
